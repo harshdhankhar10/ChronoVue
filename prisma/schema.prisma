@@ -1,0 +1,101 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String        @id @default(cuid())
+  fullName       String?
+  username       String        @unique
+  email          String        @unique
+  password       String
+  phoneNumber    String?
+  role           Role          @default(USER)
+  status         AccountStatus @default(INACTIVE)
+  isVerified     Boolean       @default(false)
+  lastLogin      DateTime?
+  credits        Int           @default(5)
+  profilePicture String        @default("https://www.mauicardiovascularsymposium.com/wp-content/uploads/2019/08/dummy-profile-pic-300x300.png")
+
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+  Profile    Profile?
+  Onboarding Onboarding?
+}
+
+enum Role {
+  ADMIN
+  USER
+  MODERATOR
+}
+
+enum AccountStatus {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+}
+
+model Profile {
+  id          String   @id @default(cuid())
+  bio         String?
+  headline    String?
+  location    String?
+  timezone    String?
+  language    String   @default("English")
+  skills      String[]
+  careerStage String?
+  userId      String   @unique
+  user        User     @relation(fields: [userId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Onboarding {
+  id                  String         @id @default(cuid())
+  userId              String         @unique
+  user                User           @relation(fields: [userId], references: [id])
+  onboardingStep      Int            @default(0)
+  primaryGoalCategory GoalCategory?
+  topGoals            String[]
+  timeHorizon         TimeHorizon?
+  riskTolerance       RiskTolerance?
+  preferredView       PreferredView?
+  interests           String[]
+  referralSource      String? // "Friend", "LinkedIn", "Ad"
+  referralID          String?
+
+  completedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+enum GoalCategory {
+  CAREER
+  EDUCATION
+  HEALTH
+  FINANCE
+  PERSONAL_GROWTH
+  ENTREPRENEURSHIP
+}
+
+enum TimeHorizon {
+  ONE_YEAR
+  THREE_YEARS
+  FIVE_YEARS
+}
+
+enum RiskTolerance {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+enum PreferredView {
+  TIMELINE
+  ROADMAP
+  CALENDAR
+}

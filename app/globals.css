@@ -1,42 +1,139 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@media (prefers-color-scheme: dark) {
+
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: 0 0% 98%;
+    --foreground: 210 16% 29%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 210 16% 29%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 16% 29%;
+
+    /* Primary Navy - Professional, reliable */
+    --primary: 220 65% 32%;
+    --primary-foreground: 0 0% 98%;
+
+    /* Sky Blue - Secondary actions */
+    --secondary: 213 93% 60%;
+    --secondary-foreground: 0 0% 98%;
+
+    /* Slate Gray for text and containers */
+    --muted: 210 16% 95%;
+    --muted-foreground: 210 16% 29%;
+
+    /* Mint Green - Success states */
+    --accent: 161 65% 53%;
+    --accent-foreground: 0 0% 98%;
+
+    /* Warm Orange - Alerts and attention */
+    --destructive: 23 93% 52%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 210 16% 90%;
+    --input: 210 16% 90%;
+    --ring: 220 65% 32%;
+
+    --radius: 0.75rem;
+
+    /* Custom brand tokens */
+    --brand-navy: 220 65% 32%;
+    --brand-sky: 213 93% 60%;
+    --brand-slate: 210 16% 29%;
+    --brand-mint: 161 65% 53%;
+    --brand-orange: 23 93% 52%;
+
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(var(--brand-navy)), hsl(var(--brand-sky)));
+    --gradient-feature: linear-gradient(180deg, hsl(var(--background)), hsl(var(--muted)));
+    --gradient-accent: linear-gradient(45deg, hsl(var(--brand-mint)), hsl(var(--brand-sky)));
+
+    /* Shadows */
+    --shadow-subtle: 0 2px 8px -2px hsl(var(--brand-navy) / 0.1);
+    --shadow-medium: 0 8px 25px -8px hsl(var(--brand-navy) / 0.2);
+    --shadow-large: 0 20px 40px -12px hsl(var(--brand-navy) / 0.25);
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-spring: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+@layer components {
+  .nav-link {
+    @apply relative text-muted-foreground font-medium transition-colors duration-300 hover:text-foreground;
+    @apply after:content-[''] after:absolute after:w-full after:h-0.5 after:bg-primary after:left-0 after:bottom-[-4px];
+    @apply after:transform after:scale-x-0 after:origin-center after:transition-transform after:duration-300;
+    @apply hover:after:scale-x-100;
   }
 }
