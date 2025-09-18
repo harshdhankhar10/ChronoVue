@@ -17,6 +17,7 @@ interface UserProps {
 
 const TopNavbar = ({ user }: UserProps) => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [isProfileOpen, setIsProfileOpen] = useState(false);
 
     return (
         <div>
@@ -37,6 +38,9 @@ const TopNavbar = ({ user }: UserProps) => {
                                 width={254}
                                 height={54}
                                 className="lg:absolute md:absolute -left-2"
+                                priority
+
+
                             />
                         </Link>
                     </div>
@@ -67,7 +71,7 @@ const TopNavbar = ({ user }: UserProps) => {
                                 className="flex items-center space-x-2 p-1.5 rounded-xl hover:bg-slate-100 transition-colors duration-200"
                             >
                                 <div className="w-8 h-8 rounded-full flex items-center justify-center">
-                                    <Image alt="User Profile Picture" height={64} width={64} src={user.profilePicture} className='rounded-full' />
+                                    <Image alt="User Profile Picture" height={64} width={64} src={user.profilePicture} className='rounded-full' priority />
                                 </div>
                                 <div className="hidden md:block">
                                     <p className="text-sm font-medium text-slate-800">

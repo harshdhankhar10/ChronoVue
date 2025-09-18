@@ -6,6 +6,7 @@ import Sidebar from "./Sidebar";
 import TopNavbar from "./TopNavbar";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import prisma from "@/lib/prisma";
 
 export const metadata: Metadata = {
     title: "Dashboard | ChronoVue",
