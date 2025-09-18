@@ -6,7 +6,16 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react'
 
-const TopNavbar = ({ user }) => {
+interface User {
+    username: string;
+    profilePicture: string
+}
+
+interface UserProps {
+    user: User;
+}
+
+const TopNavbar = ({ user }: UserProps) => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     return (
