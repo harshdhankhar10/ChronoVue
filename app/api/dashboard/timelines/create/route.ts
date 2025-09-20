@@ -21,6 +21,8 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: "At least one milestone is required!" }, { status: 400 })
         }
 
+
+
         const timelineData = await prisma.timeline.create({
             data: {
                 userId: user.id,
@@ -30,6 +32,7 @@ export async function POST(req: NextRequest) {
                 risk_challanges: timeline.risks,
                 startDate: timeline.startDate,
                 resources_needed: timeline.resources,
+                endDate: new Date()
             }
         })
 
