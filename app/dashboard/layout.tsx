@@ -47,17 +47,18 @@ export default async function DashboardLayout({
     return (
         <>
             <div className="min-h-screen bg-slate-50">
-                <div className="flex">
+                <div className="flex flex-col lg:flex-row">
                     <Sidebar />
 
                     <div className="flex-1 lg:ml-0">
                         <TopNavbar user={session.user} />
-                        <main className=" pt-20 pl-64 py-4">
+                        <main className="pt-20 md:pl-64 mx-2 mb-8 sm:pl-4">
                             {children}
                         </main>
                     </div>
                 </div>
             </div>
+
 
         </>
     );

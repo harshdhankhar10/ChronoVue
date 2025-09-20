@@ -45,7 +45,7 @@ const TopNavbar = ({ user }: UserProps) => {
                         </Link>
                     </div>
 
-                    <div className="flex-1 w-full pl-48 mx-8 hidden md:block">
+                    <div className="flex-1 w-full pl-48 mx-8 hidden sm:block">
                         <div className="relative">
                             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-slate-400" />
                             <Input
@@ -55,7 +55,6 @@ const TopNavbar = ({ user }: UserProps) => {
                             />
                         </div>
                     </div>
-
                     <div className="flex items-center space-x-3">
                         <button className="p-2.5 rounded-xl hover:bg-slate-100 transition-colors duration-200 relative">
                             <Bell className="w-5 h-5 text-slate-600" />

@@ -192,16 +192,7 @@ const Sidebar = () => {
                 </div>
             )}
 
-            <div className="lg:hidden fixed top-16 left-0 right-0 z-30 bg-white border-b border-slate-100 px-4 py-3">
-                <div className="relative">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-slate-400" />
-                    <input
-                        type="text"
-                        placeholder="Search anything..."
-                        className="w-full pl-10 pr-4 py-2.5 bg-slate-100 border-none rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 transition-all duration-300"
-                    />
-                </div>
-            </div>
+
         </>
     );
 };

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import { NEXT_AUTH } from "@/utils/auth";
 import { redirect } from "next/navigation";
+import prisma from "@/lib/prisma";
 
 export const metadata: Metadata = {
     title: "Onboarding - ChronoVue",
@@ -20,6 +21,15 @@ export default async function OnboardingLayout({
     if (session.user?.role !== "USER") {
         return redirect("/signin");
     }
+
+    let user = await prisma?.user.findUnique({
+        where: { id: session.user.id },
+    });
+
+    if (!user) {
+        return redirect("/signin");
+    }
+
 
     const onboardingDetails = await prisma?.onboarding.findUnique({
         where: { userId: session.user.id },
