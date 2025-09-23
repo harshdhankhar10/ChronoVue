@@ -2,50 +2,78 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer base {
   :root {
+    /* Background and Foreground */
     --background: 0 0% 98%;
+    /* Light background */
     --foreground: 210 16% 29%;
+    /* Dark text color */
 
+    /* Card and Popover Colors */
     --card: 0 0% 100%;
+    /* White for cards */
     --card-foreground: 210 16% 29%;
-
+    /* Dark text for cards */
     --popover: 0 0% 100%;
     --popover-foreground: 210 16% 29%;
+    /* Same dark color for popovers */
 
-    /* Primary Navy - Professional, reliable */
-    --primary: 220 65% 32%;
-    --primary-foreground: 0 0% 98%;
+    /* Primary Colors - Adjusted to match Tailwind's text-orange-600 */
+    --primary: 20 100% 48%;
+    /* Primary color: Orange (Tailwind's text-orange-600 equivalent) */
+    --primary-foreground: 30 85% 50%;
+    
+    --hover: 30 85% 50%;
 
-    /* Sky Blue - Secondary actions */
-    --secondary: 213 93% 60%;
+    /* Light text color for contrast with primary color */
+
+    /* Secondary Colors - Sky Blue (for secondary actions) */
+    --secondary: 213 93%  60%;
+    /* Sky blue */
     --secondary-foreground: 0 0% 98%;
+    /* Light foreground for secondary text */
 
-    /* Slate Gray for text and containers */
+    /* Muted Colors - Light Slate Gray for text and containers */
     --muted: 210 16% 95%;
+    /* Light gray for muted elements */
     --muted-foreground: 210 16% 29%;
+    /* Darker gray for text in muted sections */
 
-    /* Mint Green - Success states */
+    /* Accent Colors - Mint Green for success states */
     --accent: 161 65% 53%;
+    /* Mint green for success states */
     --accent-foreground: 0 0% 98%;
+    /* Light foreground for accent text */
 
-    /* Warm Orange - Alerts and attention */
+    /* Destructive Colors - Warm Orange for Alerts and Attention */
     --destructive: 23 93% 52%;
+    /* Orange for destructive actions */
     --destructive-foreground: 0 0% 98%;
+    /* Light foreground for destructive elements */
 
+    /* Border and Input Styles */
     --border: 210 16% 90%;
+    /* Light border color */
     --input: 210 16% 90%;
+    /* Light input border color */
     --ring: 220 65% 32%;
+    /* Accent ring color */
 
+    /* Radius for rounded corners */
     --radius: 0.75rem;
 
     /* Custom brand tokens */
     --brand-navy: 220 65% 32%;
+    /* Navy blue for branding */
     --brand-sky: 213 93% 60%;
+    /* Sky blue for branding */
     --brand-slate: 210 16% 29%;
+    /* Slate gray for branding */
     --brand-mint: 161 65% 53%;
+    /* Mint green for branding */
     --brand-orange: 23 93% 52%;
+    /* Warm orange for branding */
 
     /* Gradients */
     --gradient-hero: linear-gradient(135deg, hsl(var(--brand-navy)), hsl(var(--brand-sky)));
@@ -61,47 +89,39 @@
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-spring: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
-    --radius: 0.75rem;
-
+    /* Sidebar Colors */
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
+    /* Dark Mode Colors */
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
-
+    /* Light text for dark mode */
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
-
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
 
     --primary: 210 40% 98%;
+    /* Light primary in dark mode */
     --primary-foreground: 222.2 47.4% 11.2%;
+    /* Darker foreground for primary in dark mode */
 
+    /* Other Dark Mode Styles */
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
-
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
-
     --accent: 217.2 32.6% 17.5%;
     --accent-foreground: 210 40% 98%;
-
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 

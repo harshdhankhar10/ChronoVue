@@ -18,9 +18,17 @@ import {
     Search,
     ChevronDown
 } from 'lucide-react';
-import { Input } from '@/components/ui/input';
 import Link from 'next/link';
-import Image from 'next/image';
+
+interface SidebarProps {
+    isActive: boolean;
+    onClick: () => void;
+    item: {
+        icon: React.ElementType;
+        label: string;
+    };
+
+}
 
 const Sidebar = () => {
     const [activeItem, setActiveItem] = useState('dashboard');
@@ -37,7 +45,7 @@ const Sidebar = () => {
         { id: 'resources', icon: Bookmark, label: 'Resources', link: '/dashboard/resources' }
     ];
 
-    const NavItem = ({ item, isActive, onClick }: any) => {
+    const NavItem = ({ item, isActive, onClick }: SidebarProps) => {
         const Icon = item.icon;
         return (
             <button

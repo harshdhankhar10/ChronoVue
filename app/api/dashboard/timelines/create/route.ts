@@ -32,7 +32,7 @@ export async function POST(req: NextRequest) {
                 risk_challanges: timeline.risks,
                 startDate: timeline.startDate,
                 resources_needed: timeline.resources,
-                endDate: new Date()
+                endDate: timeline.endDate,
             }
         })
 
@@ -45,6 +45,7 @@ export async function POST(req: NextRequest) {
                 status: milestone.status,
                 priority: milestone.priority,
                 tags: milestone.tags,
+                userId: user.id,
             }))
         })
 

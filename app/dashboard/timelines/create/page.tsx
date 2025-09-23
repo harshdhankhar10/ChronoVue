@@ -6,12 +6,14 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { useRouter } from 'next/navigation';
 
 interface Timeline {
     name: string;
     category: string;
     duration: string;
     startDate: Date;
+    endDate: Date;
     risks: string[];
     resources: string[];
 }
@@ -30,12 +32,14 @@ const TimelineCreation = () => {
     const durations = ['ONE_YEAR', 'THREE_YEARS', 'FIVE_YEARS'];
     const priorities = ['LOW', 'MEDIUM', 'HIGH'];
     const statuses = ['NOT_STARTED', 'IN_PROGRESS', 'COMPLETED'];
+    const router = useRouter();
 
     const [timeline, setTimeline] = useState<Timeline>({
         name: '',
         category: '',
         duration: '',
         startDate: new Date(),
+        endDate: new Date(),
         risks: [],
         resources: [],
     });
@@ -129,6 +133,7 @@ const TimelineCreation = () => {
                     title: 'Success',
                     text: response.data.message,
                 });
+                router.push('/dashboard/timelines');
             } else {
                 Swal.fire({
                     icon: 'error',
@@ -198,14 +203,27 @@ const TimelineCreation = () => {
                                     </select>
                                 </div>
                             </div>
-                            <div className="mb-4">
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Start Date</label>
-                                <div className="relative">
-                                    <Input
-                                        type="date"
-                                        value={timeline.startDate.toISOString().split('T')[0]}
-                                        onChange={(e) => setTimeline({ ...timeline, startDate: new Date(e.target.value) })}
-                                    />
+
+                            <div className="grid grid-cols-2 gap-4">
+                                <div className="mb-4">
+                                    <label className="block text-sm font-medium text-gray-700 mb-1">Start Date</label>
+                                    <div className="relative">
+                                        <Input
+                                            type="date"
+                                            value={timeline.startDate.toISOString().split('T')[0]}
+                                            onChange={(e) => setTimeline({ ...timeline, startDate: new Date(e.target.value) })}
+                                        />
+                                    </div>
+                                </div>
+                                <div className="mb-4">
+                                    <label className="block text-sm font-medium text-gray-700 mb-1">End Date</label>
+                                    <div className="relative">
+                                        <Input
+                                            type="date"
+                                            value={timeline.endDate.toISOString().split('T')[0]}
+                                            onChange={(e) => setTimeline({ ...timeline, endDate: new Date(e.target.value) })}
+                                        />
+                                    </div>
                                 </div>
                             </div>
                         </div>

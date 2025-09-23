@@ -8,14 +8,16 @@ import React, { useState } from 'react'
 
 interface User {
     username: string;
-    profilePicture: string
+    profilePicture: string;
+    
 }
-
+    
 interface UserProps {
     user: User;
+    credits: undefined | number;
 }
 
-const TopNavbar = ({ user }: UserProps) => {
+const TopNavbar = ({ user, credits }: UserProps) => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [isProfileOpen, setIsProfileOpen] = useState(false);
 
@@ -61,9 +63,10 @@ const TopNavbar = ({ user }: UserProps) => {
                             <span className="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full"></span>
                         </button>
 
-                        <button className="p-2.5 rounded-xl hover:bg-slate-100 transition-colors duration-200 hidden sm:block">
-                            <MessageSquare className="w-5 h-5 text-slate-600" />
-                        </button>
+                        <div className='bg-slate-100 text-slate-800 text-sm font-medium px-3 py-1.5 rounded-lg'>
+                            
+                            {credits} Credits
+                        </div>
 
                         <div className="relative">
                             <button

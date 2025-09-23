@@ -165,8 +165,6 @@ model MileStone {
 model SubTask {
   id          String    @id @default(cuid())
   title       String
-  priority    Priority  @default(MEDIUM)
-  status      Status    @default(NOT_STARTED)
   mileStone   MileStone @relation(fields: [mileStoneId], references: [id])
   mileStoneId String
   createdAt   DateTime  @default(now())
@@ -178,7 +176,6 @@ model Reflection {
   note        String
   mileStone   MileStone @relation(fields: [mileStoneId], references: [id])
   mileStoneId String
-  tags        String[]
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
 }

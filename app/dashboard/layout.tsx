@@ -30,6 +30,10 @@ export default async function DashboardLayout({
         where: { userId: session.user.id },
     });
 
+    const userCredits = await prisma?.user.findUnique({
+        where: { id: session.user.id },
+    })
+
     if (onboardingDetails?.onboardingStep !== 7) {
         return <>
             <div className="min-h-screen bg-slate-50 flex items-center justify-center">
@@ -51,7 +55,7 @@ export default async function DashboardLayout({
                     <Sidebar />
 
                     <div className="flex-1 lg:ml-0">
-                        <TopNavbar user={session.user} />
+                        <TopNavbar user={session.user} credits={userCredits?.credits} />
                         <main className="pt-20 md:pl-64 mx-2 mb-8 sm:pl-4">
                             {children}
                         </main>
