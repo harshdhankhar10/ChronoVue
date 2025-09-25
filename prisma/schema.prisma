@@ -27,6 +27,7 @@ model User {
   Onboarding Onboarding?
   Timeline   Timeline[]
   MileStone  MileStone[]
+  Journal    Journal[]
 }
 
 enum Role {
@@ -178,4 +179,30 @@ model Reflection {
   mileStoneId String
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
+}
+
+
+enum MOOD{
+  HAPPY
+  SAD
+  NEUTRAL
+  EXCITED
+  ANXIOUS
+  GRATEFUL
+  STRESSED
+  MOTIVATED
+  REFLECTIVE
+}
+model Journal{
+  id String @id @default(cuid())
+  user User @relation(fields: [userId], references: [id])
+  userId String
+  title String
+  content String
+  tags String[]
+  mood MOOD @default(REFLECTIVE)
+  ai_suggestions Json[] @default([])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
 }

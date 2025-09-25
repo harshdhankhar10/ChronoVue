@@ -39,7 +39,7 @@ const Sidebar = () => {
         { id: 'timelines', icon: GitBranch, label: 'My Timelines', link: '/dashboard/timelines' },
         { id: 'create', icon: PlusSquare, label: 'Create Timeline', link: '/dashboard/timelines/create' },
         { id: 'ai-insights', icon: Brain, label: 'AI Insights', link: '/dashboard/ai-insights' },
-        { id: 'journal', icon: BookOpen, label: 'Journal / Reflections', link: '/dashboard/journal' },
+        { id: 'journal', icon: BookOpen, label: 'Journal', link: '/dashboard/journal' },
         { id: 'mentor', icon: Users, label: 'Mentor Connect', link: '/dashboard/mentor' },
         { id: 'community', icon: Users, label: 'Community', link: '/dashboard/community' },
         { id: 'resources', icon: Bookmark, label: 'Resources', link: '/dashboard/resources' }
