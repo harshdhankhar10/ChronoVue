@@ -75,6 +75,16 @@ Plan, track, and reflect on your personal or career goals through a dynamic time
 ---
 
 
+### 2. **Journal Logs**
+
+* Users can write **daily or weekly journals** (like a personal log).
+* Example: “This week I finished my DSA course, but I struggled with graphs.”
+* AI can reads your journal and gives **feedback or encouragement**.
+* Over time, you can **look back at your growth**.
+
+---
+
+
 ## 🔮 Planned Features (coming soon)
 
 ---
@@ -85,16 +95,6 @@ Plan, track, and reflect on your personal or career goals through a dynamic time
 * Example: If your timeline has “Full Stack Internship”, AI might suggest “Practice React projects” or “Revise SQL basics”.
 * AI can also **predict realistic timelines** by comparing with other users’ data (future feature).
 
----
-
-### 3. **Journal & Reflection Logs**
-
-* Users can write **daily or weekly reflections** (like a personal log).
-* Example: “This week I finished my DSA course, but I struggled with graphs.”
-* AI reads your reflection and gives **feedback or encouragement**.
-* Over time, you can **look back at your growth**.
-
----
 
 ### 4. **Mentorship Matching**
 
@@ -136,7 +136,7 @@ Plan, track, and reflect on your personal or career goals through a dynamic time
 
 ## 🛠️ Tech Stack
 
-* **Next.js 5** → Modern React-based framework
+* **Next.js 15** → Modern React-based framework
 * **TailwindCSS** → For responsive, professional UI design
 * **Prisma** → Database ORM
 * **PostgreSQL** → Database
