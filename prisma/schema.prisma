@@ -28,6 +28,15 @@ model User {
   Timeline   Timeline[]
   MileStone  MileStone[]
   Journal    Journal[]
+  ownedSpaces     CommunitySpace[]
+  memberships     CommunityMember[]
+  posts           CreatePost[]
+  postLikes       PostLike[]
+  postComments    PostComment[]
+  postReports     PostReport[]
+  postSaves       PostSave[]
+  recentActivities CommunitySpaceRecentActivity[]
+  
 }
 
 enum Role {
@@ -205,4 +214,171 @@ model Journal{
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+}
+
+
+model CommunitySpace{
+  id String @id @default(cuid())
+  name String
+  slug String @unique
+  description String
+  coverImage String?
+  isPrivate Boolean @default(false)
+  isVerified Boolean @default(false)
+  category String
+  rules String[]
+  owner User @relation(fields: [ownerId], references: [id])
+  ownerId String
+  members CommunityMember[]
+  joinCode String @default(uuid())
+  posts CreatePost[]
+  recentActivities CommunitySpaceRecentActivity[]
+  notifications CommunitySpaceNotification[]
+
+  maxMembers Int @default(240)
+  canUsersCreatePosts Boolean @default(true)
+  
+
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum MemberRole{
+  ADMIN
+  MODERATOR
+  MEMBER
+}
+
+enum JoinMethod{
+  INVITE // invite only
+  REQUEST // request to join, needs approval
+  OPEN // anyone can join
+}
+
+enum MemberStatus{
+  ACTIVE
+  PENDING
+  BANNED
+}
+
+model CommunityMember{
+  id String @id @default(cuid())
+  user User @relation(fields: [userId], references: [id])
+  joinMethod JoinMethod @default(OPEN)
+  status MemberStatus @default(ACTIVE)
+  isApproved Boolean @default(false) //only admins can approve
+  userId String
+  space CommunitySpace @relation(fields: [spaceId], references: [id])
+  spaceId String
+  notifications CommunitySpaceNotification[]
+  role MemberRole @default(MEMBER) 
+  joinedAt DateTime @default(now())
+}
+
+enum POST_STATUS{
+  DRAFT
+  PUBLISHED
+}
+
+enum PostType{
+  POST
+  TIMELINE 
+  MILESTONE
+  GOAL 
+}
+
+model CreatePost{
+  id String @id @default(cuid())
+  author User @relation(fields: [authorId], references: [id])
+  authorId String
+  space CommunitySpace @relation(fields: [spaceId], references: [id])
+  spaceId String
+  postType PostType @default(POST)
+  slug String @unique
+  title String
+  coverImage String @default("https://prosportsoutlook.com/wp-content/themes/prosports/images/default-post-pic.png")
+  status POST_STATUS @default(DRAFT)
+  content String
+  tags String[]
+  reportedBy PostReport[]
+  category String
+  timelineData Json? 
+  mileStoneData Json? 
+  readTime Int // in minutes
+  views Int @default(0)
+
+  attachments Json[] @default([])
+  likes PostLike[]
+  comments PostComment[]
+  saves PostSave[]
+  isCommentsEnabled Boolean @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model PostReport{
+  id String @id @default(cuid())
+  post CreatePost @relation(fields: [postId], references: [id])
+  postId String
+  reportedBy User @relation(fields: [reportedById], references: [id])
+  reportedById String
+  reason String
+  details String?
+  createdAt DateTime @default(now())
+}
+
+model PostSave{
+  id String @id @default(cuid())
+  user User @relation(fields: [userId], references: [id])
+  userId String
+  post CreatePost @relation(fields: [postId], references: [id])
+  postId String
+  createdAt DateTime @default(now())
+}
+
+model PostLike{
+  id String @id @default(cuid())
+  user User @relation(fields: [userId], references: [id])
+  userId String
+  post CreatePost @relation(fields: [postId], references: [id])
+  postId String
+  createdAt DateTime @default(now())
+}
+
+model PostComment{
+  id String @id @default(cuid())
+  user User @relation(fields: [userId], references: [id])
+  userId String
+  post CreatePost @relation(fields: [postId], references: [id])
+  postId String
+  content String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model CommunitySpaceRecentActivity{
+  id String @id @default(cuid())
+  space CommunitySpace @relation(fields: [spaceId], references: [id])
+  spaceId String
+  activity String 
+  user User @relation(fields: [userId], references: [id])
+  userId String
+  createdAt DateTime @default(now())
+}
+enum NotificationPriority{
+  LOW
+  MEDIUM
+  HIGH
+}
+model CommunitySpaceNotification{
+  id String @id @default(cuid())
+  space CommunitySpace @relation(fields: [spaceId], references: [id])
+  spaceId String
+  message String
+  user CommunityMember @relation(fields: [userId], references: [id])
+  userId String
+  priority NotificationPriority @default(MEDIUM)
+  isRead Boolean @default(false)
+  createdAt DateTime @default(now())
 }

@@ -51,6 +51,9 @@ const Navbar = () => {
                         <Link href="#about" className="nav-link">
                             Solutions
                         </Link>
+                        <Link href="/community" className="nav-link text-primary font-semibold">
+                            Community
+                        </Link>
 
                     </div>
 

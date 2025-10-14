@@ -10,8 +10,8 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: 'All fields are required' }, { status: 400 });
         }
 
-        if (!email.endsWith('@gmail.com')) {
-            return NextResponse.json({ error: 'Only Gmail addresses are allowed' }, { status: 400 });
+        if (!email.endsWith('@gmail.com') && !email.endsWith('@zohomail.in')) {
+            return NextResponse.json({ error: 'Only Gmail and Zoho Mail addresses are allowed' }, { status: 400 });
         }
 
         if (password.length < 8) {

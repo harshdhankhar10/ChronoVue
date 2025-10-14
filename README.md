@@ -32,9 +32,6 @@ Right now, the project includes:
 
 This sets up the foundation for everything else.
 
-Here’s the updated and expanded version of your README section, incorporating the features from your latest data:
-
-Absolutely! Here’s your updated **README Timeline Creation** section, now enhanced with AI integration features like personalized suggestions, dos & don’ts, and smart assistance:
 
 ---
 
@@ -84,6 +81,42 @@ Plan, track, and reflect on your personal or career goals through a dynamic time
 
 ---
 
+Looking at your schema, here's the complete and accurate Community Space description:
+
+### 3. **Community Space**
+
+A space where you can share your journey and connect with others working towards their goals.
+
+**What you can do here:**
+
+**Share Different Types of Content**
+- **Regular Posts**: Share updates, ask questions, or start discussions
+- **Timeline Posts**: Share your complete timelines with all milestones
+- **Milestone Posts**: Share individual achievements and progress updates
+
+**Join and Create Communities**
+- **Public Communities**: Open for anyone to discover and join
+- **Private Communities**: Need an invitation code to join
+- **Verified Communities**: Official communities marked with verification badge
+- Create your own community around any topic you're passionate about
+
+**Connect and Engage**
+- **Like** posts to show appreciation
+- **Comment** on posts to share thoughts and advice
+- **Save** posts to revisit later
+- **Share** posts with others
+- **Follow** communities that interest you
+
+**Community Features**
+- Each community has its own rules and guidelines
+- Admins and moderators(*under development*) manage the community
+- Members can have different roles (Admin, Moderator(*under development*), Member)
+- Track member activity 
+- Community notifications for important updates
+
+**Why we built this:**
+Working towards goals can feel isolating. This space lets you share your journey, get inspired by others' progress, and build connections with people on similar paths. Whether you're looking for advice, motivation, or just want to share your achievements, this community is here to support your growth journey.
+
 
 ## 🔮 Planned Features (coming soon)
 
@@ -101,14 +134,6 @@ Plan, track, and reflect on your personal or career goals through a dynamic time
 * AI matches you with mentors who have completed similar timelines.
 * Example: If you’re preparing for a software job, it pairs you with seniors or professionals who already did it.
 * Makes the journey more **human and guided**.
-
----
-
-### 5. **Community Space**
-
-* A place to **share timelines, progress, and reflections** with others.
-* Discussion boards for topics like career prep, coding challenges, or productivity.
-* Optional: collaborate on **shared timelines** with friends.
 
 ---
 
