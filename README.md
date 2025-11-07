@@ -205,6 +205,6 @@ MIT License — Free to use and modify.
 - ✅ Launched Resource Hub with learning paths
 - ✅ Enhanced timeline functionality - create directly from AI Insights Dashboard
 - ✅ Improved UI/UX with modern design system
-- ✅ Added notifications system
+- ✅ Added in app notifications system
 
 
