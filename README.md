@@ -1,172 +1,82 @@
+
 # ChronoVue
 
 ChronoVue is an **AI-powered future timeline platform**. The goal of this project is to help people **plan, track, and visualize their life, career, or learning goals** in a simple but powerful way.
 
 Unlike basic to-do lists or task managers, ChronoVue focuses on the **bigger picture**. It lets users see their journey as a timeline — with milestones, reflections, and AI insights — so they can stay motivated and on track.
 
-This repository contains the **first working version** of ChronoVue, with **Authentication and Onboarding completed**. More advanced features will be added step by step.
-
 ---
 
 ## 🌟 What is ChronoVue?
 
-ChronoVue is like your **personal roadmap builder**. Imagine being able to:
+ChronoVue is your **personal roadmap builder** that helps you:
 
-* Create a **timeline** of your goals (example: finishing B.Tech, preparing for interviews, getting your first job).
-* Add **milestones** (exams, projects, certifications, personal goals).
-* Write **reflections or journals** about your progress.
-* Get **AI-powered insights** that guide you on what to improve or learn next.
-* Connect with **mentors** who have already achieved what you’re working towards.
-* Share or collaborate with a **community** of like-minded learners.
-
-That’s the bigger vision of ChronoVue.
-
----
-
-## ✅ Current Features
-
-Right now, the project includes:
-
-* **User Authentication** → Users can sign up, log in, and securely access their dashboard.
-* **Onboarding Flow** → After registration, new users go through a simple setup where they add their name, basic info, and preferences.
-
-This sets up the foundation for everything else.
-
+* Create **visual timelines** for career, education, and personal goals
+* Add **milestones** with deadlines, priorities, and progress tracking
+* Write **reflective journals** to document your growth journey
+* Get **AI-powered insights** and personalized recommendations
+* Access **curated resources** and learning paths
+* Connect with **community** of like-minded learners
+* Use **AI Assistant** for real-time guidance and support
 
 ---
 
-###  1. **Timeline Creation with Power of AI**
+## ✅ Completed Features
 
-Plan, track, and reflect on your personal or career goals through a dynamic timeline—**powered by intelligent AI suggestions**.
+### **Core Platform**
+- **User Authentication & Onboarding** - Secure signup/login with personalized setup
+- **Dashboard** - Central hub with progress overview and quick actions
+- **Responsive UI Design** - Modern interface with orange primary theme
 
-####  **Core Features**
+### **Timeline Management**
+- **Interactive Timelines** - Create and manage multiple timelines
+- **Smart Milestones** - Break down goals with deadlines and priorities
+- **Progress Tracking** - Visual progress indicators and status updates
+- **Timeline Creation** - Easy setup with categories and duration settings
 
-*  **Create personalized timelines** for career development, learning paths, or personal projects.
-*  **Add milestones** such as:
-  * “Complete Data Analytics Course”
-  * “Network with Industry Professionals”
-  * “Apply for Senior Project Manager Role”
-  * “Develop AI-Driven Project Management Framework”
-    
-*  **Organize milestones** by:
-  * **Date** (e.g., Sep 20, 2025 – Feb 17, 2026)
-  * **Category** (e.g., Networking, Career Growth, Online Course)
-  * **Priority & Status** (e.g., HIGH, MEDIUM / NOT STARTED, COMPLETED)
+### **AI-Powered Features**
+- **AI Insights Dashboard** - Comprehensive progress analytics and skill gap analysis
+- **Personalized Recommendations** - AI-generated action plans and suggestions
+- **ChronoAI Assistant** - Context-aware chat assistant across all pages
+- **Progress Predictions** - Timeline confidence scores and completion estimates
 
-####  **Subtasks & Reflections**
-  * **Break down milestones** into manageable subtasks (e.g., "Enroll in course", "Connect with a mentor").
-  * **Reflect on each stage** with timestamped journaling to track growth and learnings.
-  * **Timeline dashboard** shows an interactive, visual overview of progress.
+### **Learning & Growth**
+- **Journal System** - Mood tracking, reflections, and growth documentation
+- **Resource Hub** - Curated learning materials and personalized recommendations
+- **Learning Paths** - Structured resource collections for skill development
 
-####  **AI-Powered Suggestions & Assistance**
-   *  **Smart Suggestions:** recommends new milestones or tasks based on your timeline and goals.
-   *  Example: *"Develop a Project Management Framework with AI for Risk Assessment"*
-     
-   *  **Personalized Guidance:** AI gives recommendations on:
-       *What to focus on* (e.g., improve data analysis skills)
-       *What to avoid* (e.g., applying to roles without tailored resumes)
-      
-*  **Gap Analysis:** Identifies skill or experience gaps and suggests relevant resources (courses, mentors, tools).
-*  **Career Coaching Assistant:** Provides insights on job market trends, ideal role matches, and strategy tips.
+### **Community & Social**
+- **Community Spaces** - Public/private communities with various engagement options
+- **Content Sharing** - Posts, timeline shares, and milestone celebrations
+- **Social Features** - Likes, comments, saves, and community interactions
 
 ---
 
+## 🚧 In Development
 
-### 2. **Journal Logs**
+### **Mentorship System** *(Planned for Next Release)*
+- Mentor profiles and verification system
+- Session booking and management
+- AI-powered mentor matching
+- Payment integration for premium sessions
 
-* Users can write **daily or weekly journals** (like a personal log).
-* Example: “This week I finished my DSA course, but I struggled with graphs.”
-* AI can reads your journal and gives **feedback or encouragement**.
-* Over time, you can **look back at your growth**.
-
----
-
-Looking at your schema, here's the complete and accurate Community Space description:
-
-### 3. **Community Space**
-
-A space where you can share your journey and connect with others working towards their goals.
-
-**What you can do here:**
-
-**Share Different Types of Content**
-- **Regular Posts**: Share updates, ask questions, or start discussions
-- **Timeline Posts**: Share your complete timelines with all milestones
-- **Milestone Posts**: Share individual achievements and progress updates
-
-**Join and Create Communities**
-- **Public Communities**: Open for anyone to discover and join
-- **Private Communities**: Need an invitation code to join
-- **Verified Communities**: Official communities marked with verification badge
-- Create your own community around any topic you're passionate about
-
-**Connect and Engage**
-- **Like** posts to show appreciation
-- **Comment** on posts to share thoughts and advice
-- **Save** posts to revisit later
-- **Share** posts with others
-- **Follow** communities that interest you
-
-**Community Features**
-- Each community has its own rules and guidelines
-- Admins and moderators(*under development*) manage the community
-- Members can have different roles (Admin, Moderator(*under development*), Member)
-- Track member activity 
-- Community notifications for important updates
-
-**Why we built this:**
-Working towards goals can feel isolating. This space lets you share your journey, get inspired by others' progress, and build connections with people on similar paths. Whether you're looking for advice, motivation, or just want to share your achievements, this community is here to support your growth journey.
-
-
-## 🔮 Planned Features (coming soon)
-
----
-
-### 2. **AI Insights**
-
-* AI looks at your timeline and milestones to give **smart suggestions**.
-* Example: If your timeline has “Full Stack Internship”, AI might suggest “Practice React projects” or “Revise SQL basics”.
-* AI can also **predict realistic timelines** by comparing with other users’ data (future feature).
-
-
-### 4. **Mentorship Matching**
-
-* AI matches you with mentors who have completed similar timelines.
-* Example: If you’re preparing for a software job, it pairs you with seniors or professionals who already did it.
-* Makes the journey more **human and guided**.
-
----
-
-### 6. **Resource Hub**
-
-* Curated resources (articles, courses, videos) recommended by AI.
-* Example: If your timeline has “Learn Machine Learning”, AI may suggest a top course or roadmap.
-* Saves time searching for what to learn next.
-
----
-
-### 7. **Profile & Settings**
-
-* Users can customize their profile with skills, goals, and achievements.
-* Privacy settings: choose what to keep private vs. share with the community.
-* Manage account details and notification preferences.
-
----
-
-### 8. **Premium (Future Scope)**
-
-* Extra AI-powered features like **career predictions**, **detailed analytics**, and **personalized mentoring sessions** could be part of a future premium version.
+### **Advanced Features** *(Coming Soon)*
+- Team collaboration and shared timelines
+- Advanced analytics and export capabilities
+- Mobile app development
+- Integration with external learning platforms
 
 ---
 
 ## 🛠️ Tech Stack
 
-* **Next.js 15** → Modern React-based framework
-* **TailwindCSS** → For responsive, professional UI design
-* **Prisma** → Database ORM
-* **PostgreSQL** → Database
-* **NextAuth** → Authentication system
-* **TypeScript** → Ensures type safety and scalability
+* **Next.js 15** - Modern React-based framework
+* **TailwindCSS** - Responsive, professional UI design
+* **Prisma** - Database ORM
+* **PostgreSQL** - Database
+* **NextAuth** - Authentication system
+* **TypeScript** - Type safety and scalability
+* **Google Gemini AI** - AI-powered insights and assistance
 
 ---
 
@@ -175,55 +85,126 @@ Working towards goals can feel isolating. This space lets you share your journey
 ```
 /chronovue
  ┣ /app
+ ┃ ┣ /api
+ ┃ ┣ /auth
+ ┃ ┣ /community
+ ┃ ┣ /dashboard
+ ┃ ┃ ┣ /admin
+ ┃ ┃ ┣ /mentor
+ ┃ ┃ ┗ /user
+ ┃ ┣ /onboarding
+ ┃ ┣ layout.tsx
+ ┃ ┣ loading.tsx
+ ┃ ┣ page.tsx
+ ┃ ┗ globals.css
  ┣ /components
+ ┃ ┣ /Admin
+ ┃ ┣ /Community
+ ┃ ┣ /Dashboard
+ ┃ ┣ /AI Assistant
+ ┃ ┣ /AI Insights
+ ┃ ┣ /Mentor
+ ┃ ┣ /Timelines
+ ┃ ┣ /Homepage
+ ┃ ┣ /ui
+ ┃ ┣ Homepage.tsx
+ ┃ ┗ Navbar.tsx
  ┣ /lib
- ┣ /utils
+ ┃ ┣ /generated
+ ┃ ┣ currentLoggedInUserInfo.ts
+ ┃ ┣ isAdmin.ts
+ ┃ ┣ isMentor.ts
+ ┃ ┣ prisma.ts
+ ┃ ┗ utils.ts
  ┣ /prisma
  ┣ /public
- ┗ /styles
+ ┣ /utils
+ ┗ /hooks
 ```
 
-* `app/` → Pages, routes, and main logic
-* `components/` → Reusable UI parts (buttons, forms, layouts)
-* `lib/` →  helper functions
-* `utils/` → Utilities
-* `prisma/` → Database schema & migrations
-* `public/` → Images, icons, and static files
-* `styles/` → Global CSS and Tailwind config
+---
+
+## 🎯 Implementation Roadmap
+
+### ✅ **Completed**
+1. Authentication & Onboarding
+2. Dashboard & Core UI
+3. Timeline Creation & Management
+4. AI Insights & Analytics
+5. Journal & Reflection System
+6. Community Spaces
+7. Resource Hub
+8. ChronoAI Assistant
+
+### 🔄 **In Progress**
+1. Mentorship Matching System
+2. Advanced Notification System
+3. and many more
+### 🔜 **Planned**
+1. Team Collaboration Features
+2. Advanced Export & Reporting
+3. Mobile Application
+4. Premium Subscription Features
+4. and many more
 
 ---
 
-## 🎯 Roadmap (Step by Step)
+## 🚀 Getting Started
 
-1. ✅ Authentication & Onboarding
-2. 🔜 Timeline Creation
-3. 🔜 AI Insights
-4. 🔜 Journal & Reflection Logs
-5. 🔜 Mentorship Matching
-6. 🔜 Community & Resources
-7. 🔜 Polished Dashboard UI
-8. 🔜 Pro Features (future)
+### Prerequisites
+- Node.js 20+ 
+- PostgreSQL database
+- Google Gemini API key
+
+### Installation
+```bash
+git clone https://github.com/harshdhankhar10/chronovue.git
+cd chronovue
+npm install
+cp .env.example .env.local
+# Configure your environment variables
+npx prisma generate
+npx prisma db push
+npm run dev
+```
 
 ---
 
-## 📧 Future Communication
+## 📧 Communication Features
 
-The project will also include professional email flows, such as:
-
-* Welcome Email (after signup)
-* Timeline Summary Emails
-* Reflection Reminders
-* Mentor Match Notifications
-* Weekly AI Insights Report
+- Welcome Email (after signup)
+- Progress Summary Emails
+- Reflection Reminders
+- Community Engagement Notifications
+- AI Insight Reports
+- In Dashboard Notification System
 
 ---
 
 ## 🤝 Contributing
 
-At this stage, this is a **solo project**, but ideas, issues, and feedback are welcome. If you’re interested, feel free to open a pull request.
+This project is open to contributions! Feel free to:
+- Report bugs and issues
+- Suggest new features
+- Submit pull requests
+- Improve documentation
 
 ---
 
 ## 📜 License
 
 MIT License — Free to use and modify.
+
+---
+
+## 🎉 Latest Updates
+
+**Version 1.2** - Major Feature Release
+- ✅ Added comprehensive AI Insights dashboard with end to end analytics
+- ✅ Implemented ChronoAI Assistant across all pages
+- ✅ Launched Resource Hub with learning paths
+- ✅ Enhanced timeline functionality - create directly from AI Insights Dashboard
+- ✅ Improved UI/UX with modern design system
+- ✅ Added notifications system
+
+

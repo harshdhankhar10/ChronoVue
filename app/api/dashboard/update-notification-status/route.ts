@@ -2,7 +2,7 @@ import { NextResponse, NextRequest } from "next/server";
 import prisma from "@/lib/prisma";
 import {currentLoggedInUserInfo} from "@/lib/currentLoggedInUserInfo"
 
-export async function PATCH(req: NextResponse){
+export async function PATCH(){
     const user = await currentLoggedInUserInfo();
     if(!user){
         return (
