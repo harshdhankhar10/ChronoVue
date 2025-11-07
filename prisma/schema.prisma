@@ -14,6 +14,7 @@ model User {
   email          String        @unique
   password       String
   phoneNumber    String?
+  isMentor       Boolean       @default(false)
   role           Role          @default(USER)
   status         AccountStatus @default(INACTIVE)
   isVerified     Boolean       @default(false)
@@ -35,8 +36,20 @@ model User {
   postComments    PostComment[]
   postReports     PostReport[]
   postSaves       PostSave[]
+
   recentActivities CommunitySpaceRecentActivity[]
-  
+  payments         PaymentTransaction[]
+
+  mentorProfile   MentorProfile?
+  mentorSessions  MentorSession[] @relation("MentorSessions")
+  studentSessions MentorSession[] @relation("StudentSessions")
+  AIInsights AIInsight[]
+  notifications Notification[]
+
+
+
+
+
 }
 
 enum Role {
@@ -382,3 +395,192 @@ model CommunitySpaceNotification{
   isRead Boolean @default(false)
   createdAt DateTime @default(now())
 }
+
+
+enum SessionType{
+  ONE_ON_ONE
+  VIDEO_CALL
+  WEBINAR
+  WORKSHOP
+}
+
+enum PaymentStatus{
+  PENDING
+  COMPLETED
+  FAILED
+  REFUNDED
+}
+
+model MentorProfile {
+  id         String   @id @default(cuid())
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId     String   @unique
+
+  bio              String?
+  expertise        String[]
+  experienceYears  Int?
+
+  timezone         String?
+  availabilitySlots Json[]
+
+  totalSessions    Int   @default(0)
+  averageRating    Float @default(0.0)
+  totalEarnings    Float @default(0.0)
+
+  isVerified Boolean @default(false)
+  isActive   Boolean @default(true)
+  reasonForNotVerification Json?
+  reasonForDeactivation    String?
+
+  paymentStatus PaymentStatus @default(PENDING)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  currentJob      Json?
+  pastJobs        Json[]
+  socialProfiles  Json[]
+
+  technicalSkills   String[]
+  softSkills        String[]
+  certifications    Json[]
+  specializations   String[]
+
+  mentoringCategories String[]
+  targetAudiences     String[]
+  sessionTypesOffered SessionType[]
+
+  rate     Float  @default(0.0)
+  currency String @default("INR")
+
+  applicationQuestions Json[]
+
+  isAgreedToTerms           Boolean @default(false)
+  codeOfConductAgreement    Boolean @default(false)
+  backgroundCheckAgreement  Boolean @default(false)
+
+  sessions MentorSession[]
+
+}
+
+model MentorSession {
+  id           String        @id @default(cuid())
+  
+  mentor       MentorProfile @relation(fields: [mentorId], references: [id], onDelete: Cascade)
+  mentorId     String
+  
+  student      User          @relation("StudentSessions", fields: [studentId], references: [id], onDelete: Cascade)
+  studentId    String
+
+  mentorUser   User?         @relation("MentorSessions", fields: [mentorUserId], references: [id])
+  mentorUserId String?
+
+  sessionType  SessionType
+  topic        String
+  duration     Int
+  scheduledAt  DateTime
+  status       SessionStatus @default(SCHEDULED)
+  feedback     Json?
+  paymentStatus PaymentStatus @default(PENDING)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+}
+
+
+enum SessionStatus {
+  SCHEDULED
+  COMPLETED
+  CANCELLED
+  RESCHEDULED
+}
+
+
+model PaymentTransaction {
+  id             String        @id @default(cuid())
+  user           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId         String
+  amount         Float
+  currency       String        @default("INR")
+  paymentMethod  String
+  transactionId  String        @unique
+  status         PaymentStatus @default(PENDING)
+  type          String
+  additionalInfo String?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+}
+
+
+model AIInsight {
+  id          String   @id @default(cuid())
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String
+  
+  title       String
+  type        InsightType
+  period      String  
+  version     String   @default("v1.0")
+  
+  generationTrigger GenerationTrigger
+  dataSnapshot Json   
+  dataSources  Json   
+  
+  summary     String
+  keyFindings Json   
+  confidence  Int     
+  
+  recommendations Json   
+  riskAnalysis    Json?   
+  skillGaps       Json?   
+  isRead      Boolean @default(false)
+  isHelpful   Boolean? 
+  userComment String?
+  actionItemsCompleted Int @default(0)
+  totalActionItems Int @default(0)
+  
+  creditsUsed Int       @default(1)
+  shouldRegenerate Boolean @default(false)
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+enum InsightType{
+  CAREER
+  EDUCATION
+  HEALTH
+  FINANCE
+  PERSONAL_GROWTH
+  ENTREPRENEURSHIP
+}
+
+enum GenerationTrigger{
+  USER_ACTION
+  SCHEDULED_GENERATION
+  SYSTEM_AUTO_GENERATION
+}
+
+
+model Notification {
+  id String @id @default(cuid())
+  user User @relation(fields: [userId], references: [id])
+  userId String
+  title String
+  message String
+  isRead Boolean @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+
+
+
+
+
+
+
+
+
+

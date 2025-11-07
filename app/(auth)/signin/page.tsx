@@ -37,7 +37,7 @@ const SignInForm = () => {
             } else {
                 setMessage("Login Sucessfull. Redirecting to Dashboard...")
                 setTimeout(() => {
-                    router.push("/dashboard")
+                    router.push("/dashboard/user")
                 }, 1500)
             }
         } catch (error) {

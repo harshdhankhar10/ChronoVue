@@ -209,7 +209,7 @@ const AddMilestoneModal = ({ showAddMilestone, setShowAddMilestone, timelineID }
           >
             Cancel
           </Button>
-          <Button className='bg-secondary hover:bg-secondary/90 text-white'
+          <Button
             onClick={handleSubmit} disabled={loading}
           >
             {loading ? <Loader className="animate-spin mr-2" size={16} /> : 'Add Milestone'}

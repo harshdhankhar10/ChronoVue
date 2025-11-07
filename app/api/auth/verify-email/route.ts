@@ -162,6 +162,7 @@ export async function POST(req: NextRequest) {
 </html>
          `
 
+
         await sendMail({ to, subject, htmlContent })
         return NextResponse.json({ message: "We have sent you an OTP to verify your account" }, { status: 201 });
 
@@ -187,10 +188,17 @@ export async function PATCH(req: NextRequest) {
         if (email === email && otpData.otp === otp) {
             const expiryTime = new Date(otpData.expiry);
             if (currentTime < expiryTime) {
-                await prisma.user.update({
+                const user = await prisma.user.update({
                     where: { email },
                     data: { isVerified: true, status: 'ACTIVE' },
                 });
+                await prisma.notification.create({
+                    data : {
+                        userId: user.id,
+                        title: 'Welcome to ChronoVue',
+                        message: 'Welcome to ChronoVue! We\'re excited to have you on board. Start your journey to achieve your goals with our personalized tools and resources.',
+                    }
+                })
                 return NextResponse.json({ message: "Your account has been verified successfully" }, { status: 201 });
             } else {
                 return NextResponse.json({ error: "The OTP You entered has expired" }, { status: 400 });

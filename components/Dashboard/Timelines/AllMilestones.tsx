@@ -191,7 +191,7 @@ const AllMilestones = ({ milestones }: { milestones: MilestoneWithDetails[] }) =
                             placeholder="Subtask title"
                             value={newSubtaskTitle}
                             onChange={(e) => setNewSubtaskTitle(e.target.value)}
-                            className="flex-1 border border-gray-300 rounded-md shadow-sm py-1.5 px-3 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                            className="flex-1 border border-gray-300 rounded-md shadow-sm py-1.5 px-3 focus:outline-none focus:ring-1 focus:ring-teal-600 focus:border-blue-500 text-sm"
                           />
                           <div className="flex gap-1">
                             <button
@@ -249,7 +249,7 @@ const AllMilestones = ({ milestones }: { milestones: MilestoneWithDetails[] }) =
                           rows={2}
                           value={newReflectionNote}
                           onChange={(e) => setNewReflectionNote(e.target.value)}
-                          className="w-full border border-gray-300 rounded-md shadow-sm py-1.5 px-3 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                          className="w-full border border-gray-300 rounded-md shadow-sm py-1.5 px-3 focus:outline-none focus:ring-1 focus:ring-teal-600  text-sm"
                         ></textarea>
                         <div className="mt-2 flex justify-end gap-2">
                           <button

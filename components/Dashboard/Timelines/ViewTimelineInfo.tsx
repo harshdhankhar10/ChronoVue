@@ -6,6 +6,7 @@ import AllMilestones from './AllMilestones'
 import AISuggestions from './AISuggestions'
 import AddMilestoneModal from './AddMilestoneModal'
 import jsPDF from 'jspdf'
+import { Button } from '@/components/ui/button'
 
 interface TimelineWithMilestones extends Timeline {
   milestones: (MileStone & {
@@ -236,12 +237,11 @@ const ViewTimelineInfo = ({ timeline }: { timeline: TimelineWithMilestones }) =>
                 )}
               </div>
               
-              <button 
+              <Button 
                 onClick={() => setShowAddMilestone(true)}
-                className="px-4 py-2 rounded-md bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors text-sm"
               >
                 Add Milestone
-              </button>
+              </Button>
             </div>
           </div>
           

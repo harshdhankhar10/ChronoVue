@@ -32,7 +32,7 @@ export default async function Header() {
           <Link href="/community" className="text-gray-500 hover:text-primary ">
             <Users className="h-5 w-5" />
           </Link>
-          <Link href="/community/explore" className="text-gray-500 hover:text-primary ">
+          <Link href="/community/discover" className="text-gray-500 hover:text-primary ">
             <Compass className="h-5 w-5" />
           </Link>
 

@@ -11,13 +11,15 @@ export async function POST(req: NextRequest) {
     }
     const user = session?.user;
     try {
-        const { timeline, milestones } = await req.json();
+        const { timeline, milestones, action } = await req.json();
 
         if (!timeline.name || !timeline.duration || !timeline.category || !timeline.startDate || !timeline.risks || !timeline.resources) {
             return NextResponse.json({ error: "All fields are required!" }, { status: 400 })
         }
+        
 
-        if (milestones.length === 0) {
+
+        if (action !== "FROM_GLOBAL_AI_INSIGHTS"  && milestones.length === 0) {
             return NextResponse.json({ error: "At least one milestone is required!" }, { status: 400 })
         }
 

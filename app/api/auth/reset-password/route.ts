@@ -178,10 +178,18 @@ export async function PATCH(req: NextRequest) {
         if (email === email && otpData.otp === otp) {
             const expiryTime = new Date(otpData.expiry);
             if (currentTime < expiryTime) {
-                await prisma.user.update({
+                const user = await prisma.user.update({
                     where: { email },
                     data: { password: hashedPassword },
                 });
+
+                await prisma.notification.create({
+                    data : {
+                        userId: user.id,
+                        title: 'Password Reset Successful',
+                        message: 'Your password has been reset successfully. You can now login with your new password.',
+                    }
+                })
                 return NextResponse.json({ message: "Your password has been reset successfully" }, { status: 201 });
             } else {
                 return NextResponse.json({ error: "The OTP You entered has expired" }, { status: 400 });

@@ -137,7 +137,7 @@ const AISuggestions = ({ suggestions, timelineID }: { suggestions: any[], timeli
                             <Button className="bg-gray-200 hover:bg-gray-300 text-gray-800" onClick={() => setIsModalOpen(false)}>
                                 Cancel
                             </Button>
-                            <Button onClick={handleGenerateSuggestions} className="bg-secondary hover:bg-secondary/90 text-white" disabled={loading}>
+                            <Button onClick={handleGenerateSuggestions}  disabled={loading}>
                                 {loading ? <Loader className='animate-spin' /> : <span>Generate</span>}
                             </Button>
                         </div>
