@@ -92,10 +92,12 @@ const TopNavbar = ({userInfo, notifications}: TopNavbarProps) => {
 
                     <div className="flex items-center space-x-4">
                         <div>
+                            <Link href="/dashboard/user/settings/credits">
                             <Button variant={"outline"}>
                                 <span>Credits Left: {userInfo.credits}</span>
-
+                                    
                             </Button>
+                            </Link>
                         </div>
                         <div className="relative">
                             <Button

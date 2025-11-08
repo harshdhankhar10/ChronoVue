@@ -20,6 +20,7 @@ const TransactionHistory = async () => {
         }
     })
 
+
     const getStatusIcon = (status: string) => {
         switch (status) {
             case 'COMPLETED':
@@ -97,7 +98,7 @@ const TransactionHistory = async () => {
                                                     <p className="text-lg font-semibold text-gray-900">
                                                         ₹{transaction.amount}
                                                     </p>
-                                                    <p className="text-sm text-gray-600 capitalize">
+                                                    <p className="text-sm text-gray-600 capitalize font-semibold text-primary">
                                                         {transaction.type.toLowerCase().replace("_", " ")}
                                                     </p>
                                             </div>
