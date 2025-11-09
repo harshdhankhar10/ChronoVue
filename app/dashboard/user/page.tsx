@@ -43,11 +43,6 @@ interface DashboardData {
     confidence: number
     createdAt: Date
   }>
-  weeklyProgress: Array<{
-    week: string
-    completed: number
-    created: number
-  }>
 }
 
 const page = async () => {
@@ -99,12 +94,6 @@ const page = async () => {
     milestoneCount: timeline.milestones.length
   }))
 
-  const weeklyProgress = [
-    { week: 'Week 1', completed: 3, created: 5 },
-    { week: 'Week 2', completed: 7, created: 4 },
-    { week: 'Week 3', completed: 5, created: 6 },
-    { week: 'Week 4', completed: 8, created: 3 }
-  ]
 
   const dashboardData: DashboardData = {
     user: {
@@ -135,7 +124,6 @@ const page = async () => {
       confidence: insight.confidence,
       createdAt: insight.createdAt
     })),
-    weeklyProgress
   }
 
   return <UserDashboardHomepage data={dashboardData} />

@@ -43,11 +43,6 @@ interface DashboardData {
     confidence: number
     createdAt: Date
   }>
-  weeklyProgress: Array<{
-    week: string
-    completed: number
-    created: number
-  }>
 }
 
 interface UserDashboardProps {
@@ -63,16 +58,24 @@ const UserDashboard = ({ data }: UserDashboardProps) => {
     .filter(t => t.status === 'COMPLETED')
     .reduce((sum, t) => sum + t.amount, 0)
 
+    const formatDate = (date: Date) => {
+    const d = new Date(date)
+    const month = String(d.getMonth() + 1).padStart(2, '0')
+    const day = String(d.getDate()).padStart(2, '0')
+    const year = d.getFullYear()
+    return `${month}/${day}/${year}`
+  }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
+    <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900">
             Welcome back, {data.user.fullName || data.user.username}!
           </h1>
           <p className="text-gray-600 mt-2">
-            Member since {new Date(data.user.createdAt).toLocaleDateString()} • {data.user.credits} credits available
+            Member since {formatDate(data.user.createdAt)} •
+            {data.user.credits} credits available
           </p>
         </div>
 
@@ -198,7 +201,14 @@ const UserDashboard = ({ data }: UserDashboardProps) => {
                     <div>
                       <h3 className="font-medium text-gray-900 capitalize">{transaction.type.toLowerCase()}</h3>
                       <p className="text-sm text-gray-600">
-                        {new Date(transaction.createdAt).toLocaleDateString()}
+                        {formatDate(transaction.createdAt)} • 
+                       <span className={`font-semibold ml-1 uppercase ${
+                         transaction.status === 'COMPLETED' ? 'text-green-600' 
+                         : transaction.status === 'PENDING' ? 'text-yellow-600' 
+                         : 'text-red-600'
+                       }`}>
+                             {transaction.status.toLowerCase()}
+                       </span>
                       </p>
                     </div>
                     <div className={`text-lg font-bold ${
@@ -233,7 +243,7 @@ const UserDashboard = ({ data }: UserDashboardProps) => {
                       <span className="text-green-600 font-medium">{insight.confidence}% confidence</span>
                     </div>
                     <p className="text-xs text-gray-500 mt-2">
-                      {new Date(insight.createdAt).toLocaleDateString()}
+                      {formatDate(insight.createdAt)}
                     </p>
                   </div>
                 ))}

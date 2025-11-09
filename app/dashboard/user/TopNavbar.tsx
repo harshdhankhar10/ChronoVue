@@ -119,7 +119,13 @@ const TopNavbar = ({userInfo, notifications}: TopNavbarProps) => {
                                 onClick={() => setIsProfileOpen(!isProfileOpen)}
                             >
                                 <div className="w-8 h-8 bg-gradient-to-br from-gray-400 to-gray-600 rounded-full flex items-center justify-center">
-                                    <User className="w-4 h-4 text-white" />
+                                    <Image
+                                        src={userInfo.profilePicture || '/default-profile.png'}
+                                        alt="Profile Picture"
+                                        width={32}
+                                        height={32}
+                                        className="rounded-full"
+                                    />
                                 </div>
                                 <div className="hidden lg:block text-left">
                                     <p className="text-sm font-medium text-gray-900">{userInfo.fullName}</p>
