@@ -10,6 +10,8 @@ export async function currentLoggedInUserInfo() {
     where: { id: session.user.id },
   });
 
+  if (!user) return false;
+
   return user;
 }
 

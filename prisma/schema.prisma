@@ -45,6 +45,7 @@ model User {
   studentSessions MentorSession[] @relation("StudentSessions")
   AIInsights AIInsight[]
   notifications Notification[]
+  aiCareerPredictor AICareerPredictor?
 
 
 
@@ -562,6 +563,18 @@ enum GenerationTrigger{
   SYSTEM_AUTO_GENERATION
 }
 
+enum NotificationType{
+  INFO
+  WARNING
+  ALERT
+
+}
+
+enum NotificationSender{
+  SYSTEM
+  USER
+  ADMIN
+}
 
 model Notification {
   id String @id @default(cuid())
@@ -570,9 +583,67 @@ model Notification {
   title String
   message String
   isRead Boolean @default(false)
+  type NotificationType @default(INFO)
+  sender NotificationSender @default(SYSTEM)
+  senderId String? 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+
+model AICareerPredictor{
+  id String @id @default(cuid())
+  user User @relation(fields: [userId], references: [id])
+  userId String @unique
+
+  currentTimeline Float @default(0.0)
+  optimizedTimeline Float @default(0.0)
+  confidenceScore Float @default(0.0)
+  jobReadyDate DateTime?
+
+  timelineComparison Json @default("{}")
+  daysSaved Json @default("{}")
+  paceAnalysis Json @default("{}")
+
+  skillsRadarData Json @default("{}")
+  skillProgression Json @default("{}")
+
+  riskAssessment Json @default("{}")
+  successProbability Json @default("{}")
+
+  careerPathScenarios Json[] @default([])
+  salaryProjections Json[] @default([])
+  companyTargets Json[] @default([])
+
+  roleMatches Json[] @default([])
+  skillGaps Json[] @default([])
+
+  whatToDos Json[] @default([])
+  whatNotToDos Json[] @default([])
+
+  successFactors Json[] @default([])
+
+  // recommendations for improvement
+  actionPlan Json @default("{}")
+  marketInsights Json @default("{}")
+
+  motivationAnalysis Json @default("{}")
+  interviewReadiness Json @default("{}")
+  resourcesRecommendations Json @default("{}")
+
+  learningPatterns Json @default("{}")
+  
+
+
+  isOnboarded Boolean @default(false)
+  onboardingData Json @default("{}")
+
+  predictionVersion String @default("v1.0")
+  ratingInfo Json @default("{}") // ratings and feedback summary
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 
 
 

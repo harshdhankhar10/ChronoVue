@@ -11,7 +11,8 @@ import {
     Bookmark,
     MessageSquare,
     X,
-    Menu
+    Menu,
+    Target
 } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
@@ -27,14 +28,15 @@ const Sidebar = ({ isOpenProp }: SidebarProps) => {
     const [isAiModalOpen, setIsAiModalOpen] = useState(false);
 
     const navigationItems = [
-        { id: 'dashboard', icon: LayoutDashboard, label: 'Dashboard', link: '/dashboard/user' },
-        { id: 'timelines', icon: GitBranch, label: 'My Timelines', link: '/dashboard/user/timelines' },
-        { id: 'create', icon: PlusSquare, label: 'Create Timeline', link: '/dashboard/user/timelines/create' },
-        { id: 'ai-insights', icon: Brain, label: 'AI Insights', link: '/dashboard/user/ai-insights' },
-        { id: 'journal', icon: BookOpen, label: 'Journal', link: '/dashboard/user/journal' },
-        { id: 'mentor', icon: Users, label: 'Mentor Connect', link: '/dashboard/user/mentor' },
-        { id: 'community', icon: Users, label: 'Community', link: '/dashboard/user/community/' },
-        { id: 'resources', icon: Bookmark, label: 'Resources', link: '/dashboard/user/resources' }
+        { isNew : false, id: 'dashboard', icon: LayoutDashboard, label: 'Dashboard', link: '/dashboard/user' },
+        { isNew : false, id: 'timelines', icon: GitBranch, label: 'My Timelines', link: '/dashboard/user/timelines' },
+        { isNew : false, id: 'create', icon: PlusSquare, label: 'Create Timeline', link: '/dashboard/user/timelines/create' },
+        { isNew : false, id: 'ai-insights', icon: Brain, label: 'AI Insights', link: '/dashboard/user/ai-insights' },
+        { isNew : true, id: 'Career Predictor', icon: Target, label: 'Career Predictor', link: '/dashboard/user/career-predictor' },
+        { isNew : false, id: 'journal', icon: BookOpen, label: 'Journal', link: '/dashboard/user/journal' },
+        { isNew : false, id: 'mentor', icon: Users, label: 'Mentor Connect', link: '/dashboard/user/mentor' },
+        { isNew : false, id: 'community', icon: Users, label: 'Community', link: '/dashboard/user/community/' },
+        { isNew : false, id: 'resources', icon: Bookmark, label: 'Resources', link: '/dashboard/user/resources' }
     ];
 
     const NavItem = ({ item, isActive }: { item: any; isActive: boolean }) => {

@@ -6,6 +6,8 @@ export async function POST(req: NextRequest) {
     try {
         const { fullName, email, password, username } = await req.json();
 
+        
+
         if (username.trim() === '' || password.trim() === '' || email.trim() === '' || fullName.trim() === '') {
             return NextResponse.json({ error: 'All fields are required' }, { status: 400 });
         }

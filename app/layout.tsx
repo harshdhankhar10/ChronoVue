@@ -14,25 +14,26 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ChronoVue - Visualize Tomorrow, Today",
-  description:
-    "ChronoVue is an AI-powered platform that transforms your goals into interactive timelines with milestones, risk analysis, and scenario simulations. Plan smarter, track progress, and visualize your future with powerful analytics.",
+  title: "ChronoVue - AI Career Predictor & Timeline Platform",
+  description: "ChronoVue uses AI to predict your job readiness timeline and create personalized career roadmaps. Get exact placement probabilities and skill gap analysis for tech careers.",
   keywords: [
-    "AI timeline",
-    "future planning",
-    "goal visualization",
-    "AI productivity tool",
-    "timeline generator",
-    "scenario simulation",
-    "risk analysis tool",
-    "progress tracker",
-    "goal setting platform",
+    "career predictor",
+    "placement readiness", 
+    "job timeline",
+    "AI career coach",
+    "skill gap analysis",
+    "college placement",
+    "tech career roadmap",
+    "learning analytics",
+    "progress tracking",
+    "interview preparation",
+    "campus placement",
+    "software developer career"
   ],
-  authors: [{ name: "ChronoVue Team" }],
+  authors: [{ name: "Harsh Dhankhar" }],
   openGraph: {
-    title: "ChronoVue - Visualize Tomorrow, Today",
-    description:
-      "Turn your goals into interactive timelines with AI-driven milestones, risk insights, and future scenarios. Start visualizing your tomorrow, today.",
+    title: "ChronoVue - AI Career Predictor",
+    description: "Know exactly when you'll be job-ready. AI-powered career timeline predictor for college students and career switchers.",
     url: "https://www.chronovue.com",
     siteName: "ChronoVue",
     images: [
@@ -40,7 +41,7 @@ export const metadata: Metadata = {
         url: "https://www.chronovue.com/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "ChronoVue - AI-Powered Future Timeline Visualization",
+        alt: "ChronoVue - AI Career Timeline Predictor",
       },
     ],
     locale: "en_US",
@@ -48,13 +49,12 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "ChronoVue - Visualize Tomorrow, Today",
-    description:
-      "AI-powered platform to transform your goals into interactive timelines. Plan milestones, simulate scenarios, and track progress like never before.",
+    title: "ChronoVue - AI Career Predictor",
+    description: "Predict your job readiness timeline with AI. Get personalized career roadmaps and skill gap analysis.",
     images: ["https://www.chronovue.com/twitter-card.jpg"],
-    creator: "@chronovue",
+    creator: "@harshdhankhar10",
   },
-  category: "Productivity, AI Tools, Future Planning",
+  category: "Career Planning, Education Technology, AI Tools",
   robots: {
     index: true,
     follow: true,
