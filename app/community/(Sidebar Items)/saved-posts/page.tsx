@@ -6,6 +6,7 @@ import prisma from '@/lib/prisma'
 import Link from 'next/link'
 import { Calendar, Clock, Eye, MessageCircle, Bookmark } from 'lucide-react'
 import { Metadata } from 'next'
+import { accessDenied } from '../timeline/page'
 
 export const metadata: Metadata = {
     title: 'Saved Posts - ChronoVue Community',
@@ -16,12 +17,7 @@ const page = async() => {
     const session = await getServerSession(NEXT_AUTH)
     if (!session) {
         return (
-            <div className='h-96 flex flex-col items-center justify-center gap-6'>
-                <h1 className='text-2xl font-bold'>You need to be logged in to view this page</h1>
-                <Link href="/signin" className="px-6 py-3 bg-orange-600 text-white rounded-lg hover:bg-orange-700">
-                    Sign In
-                </Link>
-            </div>
+            accessDenied
         )
     }
 

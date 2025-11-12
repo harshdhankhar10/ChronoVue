@@ -7,9 +7,62 @@ import Header from "./Header";
 import CommunitySidebar from "./CommunitySidebar";
 
 export const metadata: Metadata = {
-  title: "ChronoVue Community - Connect, Share & Grow Together",
-  description:
-    "Join the ChronoVue Community to connect with like-minded individuals, share your experiences, and grow together. Our platform offers a supportive environment where you can exchange ideas, seek advice, and collaborate on projects. Whether you're a beginner or an expert, the ChronoVue Community is the perfect place to enhance your skills and expand your network. Engage in discussions, participate in events, and access exclusive resources designed to help you succeed. Become a part of our vibrant community today and take your journey to the next level with ChronoVue.",
+  title: "ChronoVue Community - Share, Learn, and Grow Together",
+  description: "Join the ChronoVue Community to connect with like-minded individuals, share your experiences, and grow together. Our platform offers a supportive environment where you can exchange ideas, seek advice, and collaborate on projects. Whether you're a beginner or an expert, the ChronoVue Community is the perfect place to enhance your skills and expand your network. Engage in discussions, participate in events, and access exclusive resources designed to help you succeed. Become a part of our vibrant community today and take your journey to the next level with ChronoVue.",
+  keywords: [
+    "AI career predictor",
+    "job readiness timeline",
+    "placement readiness",
+    "career timeline prediction",
+    "skill gap analysis AI",
+    "career roadmap generator",
+    "learning progress tracker",
+    "placement probability calculator",
+    "college placement preparation",
+    "campus placement predictor",
+    "tech career planning",
+    "software developer career path",
+    "when will I get a job",
+    "job ready timeline",
+    "career switch timeline",
+    "placement preparation time",
+    "India placement predictor",
+    "Indian tech careers",
+    "Bangalore job readiness",
+    "Indian college placements"
+  ],
+  authors: [{ name: "ChronoVue Team" }],
+  creator: "ChronoVue",
+  publisher: "ChronoVue",
+  openGraph: {
+    title: "ChronoVue Community - Share, Learn, and Grow Together",
+    description: "Join the ChronoVue Community to connect with like-minded individuals, share your experiences, and grow together. Our platform offers a supportive environment where you can exchange ideas, seek advice, and collaborate on projects.",
+    url: "https://www.chronovue.in",
+    siteName: "ChronoVue",
+    images: [
+      {
+        url: "https://www.chronovue.in/og_image.png",
+        width: 1200,
+        height: 630,
+        alt: "ChronoVue AI Career Predictor - Your Personalized Job Readiness Timeline",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+    emails: ["support@chronovue.in"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "ChronoVue Community - Share, Learn, and Grow Together",
+    description: "Join the ChronoVue Community to connect with like-minded individuals, share your experiences, and grow together.",
+    images: ["https://www.chronovue.in/og_image.png"],
+    creator: "@harshdhankhar10",
+  },
+  category: "Career Planning, Education Technology, AI Tools",
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default async function OnboardingLayout({

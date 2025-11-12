@@ -20,22 +20,18 @@ const NotFound = () => {
     }, [params]);
 
     return (
-        <div className="min-h-screen bg-gray-50 flex flex-col antialiased">
-            <header className="absolute top-0 left-0 right-0 p-6">
-                <div className="container mx-auto">
-                    <Link href="/" className="flex items-center space-x-3 group w-fit">
-                        <Image
-                            src="/final_logo.png"
-                            alt="ChronoVue Logo"
-                            width={254}
-                            height={54}
-                            className='absolute -top-20 left-0 right-0 '
-
-                        />
-
-                    </Link>
-                </div>
-            </header>
+        <div className="min-h-screen  bg-gray-50 flex flex-col antialiased">
+            <div className="absolute   top-0 left-0 right-0 p-6">
+                <div className="flex items-center space-x-2">
+                        <Link href="/" className="flex items-center space-x-2">
+                            <Image src="/final_logo.png" alt="ChronoVue Logo"
+                                width={50}
+                                height={40}
+                            />
+                            <span className="font-bold text-2xl">Chrono<span className="text-primary">Vue</span></span>
+                        </Link>
+                    </div>
+            </div>
 
             <main className="flex-grow flex items-center justify-center p-6 pt-20">
                 <div className="container mx-auto max-w-6xl">

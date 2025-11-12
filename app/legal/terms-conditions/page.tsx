@@ -1,8 +1,38 @@
-"use client";
 
 import Footer from '@/components/Homepage/Footer';
 import Navbar from '@/components/Navbar';
+import { Metadata } from 'next';
 import React from 'react';
+
+export const metadata: Metadata = {
+  title: "Terms and Conditions - ChronoVue",
+  description: "ChronoVue's AI predicts exactly when you'll be job-ready. Get personalized placement timelines, skill gap analysis, and career roadmaps for tech roles. 85% prediction accuracy.",
+  keywords: [
+    "AI career predictor",
+    "job readiness timeline",
+    "placement readiness",
+    "career timeline prediction",
+    "skill gap analysis AI",
+    "career roadmap generator",
+    "learning progress tracker",
+    "placement probability calculator",
+    "college placement preparation",
+    "campus placement predictor",
+    "tech career planning",
+    "software developer career path",
+    "when will I get a job",
+    "job ready timeline",
+    "career switch timeline",
+    "placement preparation time",
+    "India placement predictor",
+    "Indian tech careers",
+    "Bangalore job readiness",
+    "Indian college placements"
+  ],
+  authors: [{ name: "ChronoVue Team" }],
+  creator: "ChronoVue",
+  publisher: "ChronoVue",
+};
 
 const TermsConditionsPage = () => {
   return (

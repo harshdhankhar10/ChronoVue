@@ -1,21 +1,11 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import { currentLoggedInUserInfo } from "@/lib/currentLoggedInUserInfo";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
-  title: "ChronoVue | AI Job Readiness Predictor & Career Timeline Platform",
-  description: "ChronoVue's AI predicts exactly when you'll be job-ready. Get personalized placement timelines, skill gap analysis, and career roadmaps for tech roles. 85% prediction accuracy.",
+  title: "Sign Up - ChronoVue",
+  description: "Create your ChronoVue account securely and easily. Follow our step-by-step guide to get started with your personalized AI career predictor and job readiness timeline.",
   keywords: [
     "AI career predictor",
     "job readiness timeline",
@@ -42,8 +32,8 @@ export const metadata: Metadata = {
   creator: "ChronoVue",
   publisher: "ChronoVue",
   openGraph: {
-    title: "ChronoVue - AI Job Readiness Predictor | Know Your Placement Timeline",
-    description: "Get exact AI predictions on when you'll be job-ready. Personalized career timelines, skill gap analysis, and placement readiness scores for Indian tech students.",
+    title: "Sign Up - ChronoVue",
+    description: "Create your ChronoVue account securely and easily. Follow our step-by-step guide to get started with your personalized AI career predictor and job readiness timeline.",
     url: "https://www.chronovue.in",
     siteName: "ChronoVue",
     images: [
@@ -60,8 +50,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "ChronoVue - AI Career Predictor",
-    description: "Predict your job readiness timeline with AI. Get personalized career roadmaps and skill gap analysis.",
+    title: "Sign Up - ChronoVue",
+    description: "Create your ChronoVue account securely and easily. Follow our step-by-step guide to get started with your personalized AI career predictor and job readiness timeline.",
     images: ["https://www.chronovue.in/og_image.png"],
     creator: "@harshdhankhar10",
   },
@@ -72,18 +62,14 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function RootLayout({
+export default async function SignUpLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const user = await currentLoggedInUserInfo();
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}
-        cz-shortcut-listen="true">
-        {children}
-      </body>
-    </html>
+  <div>
+    {children}
+  </div>
   );
 }

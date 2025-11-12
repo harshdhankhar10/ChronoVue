@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: any): Promise<Metadata> {
   }
 
   return {
-    title: community.name,
+    title: `${community.name} - ChronoVue Community`,
     description: `Join the ${community.name} community on ChronoVue! Connect, share, and engage with like-minded individuals.`,
   };
 }

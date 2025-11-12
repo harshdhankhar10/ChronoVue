@@ -74,24 +74,18 @@ const TopNavbar = ({userInfo, notifications}: TopNavbarProps) => {
         <>
             <nav className="fixed top-0 left-0 right-0 h-16 bg-white border-b border-gray-200 z-30 shadow-sm">
                 <div className="h-full px-6 flex items-center justify-between">
-                    <div className="flex items-center space-x-8">
-                        <div className="h-42 w-42 md:-ml-6">
-                            <Image
-                                src="/final_logo.png"
-                                alt="ChronoVue"
-                                width={144}  
-                                height={144}
-                                priority
-                                className="w-full h-full object-contain"
+                    <div className="flex items-center space-x-2">
+                        <Link href="/" className="flex items-center space-x-2">
+                            <Image src="/final_logo.png" alt="ChronoVue Logo"
+                                width={50}
+                                height={40}
                             />
-                        </div>
-
-
-                      
+                            <span className="font-bold text-2xl">Chrono<span className="text-primary">Vue</span></span>
+                        </Link>
                     </div>
 
                     <div className="flex items-center space-x-4">
-                        <div>
+                        <div className='hidden md:block'>
                             <Link href="/dashboard/user/settings/credits">
                             <Button variant={"outline"}>
                                 <span>Credits Left: {userInfo.credits}</span>

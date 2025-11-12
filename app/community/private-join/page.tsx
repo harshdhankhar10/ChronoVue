@@ -7,6 +7,7 @@ import { redirect } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { Metadata } from 'next'
+import { accessDenied } from '../(Sidebar Items)/timeline/page'
 
 export const metadata: Metadata = {
     title: 'Join Private Community - ChronoVue ',
@@ -18,17 +19,7 @@ const page = async() => {
     const session = await getServerSession(NEXT_AUTH)
     if (!session) {
         return (
-            <>
-            <div className='flex flex-col items-center justify-center min-h-screen'>
-                <h1 className='text-2xl font-bold mb-4'>Login Required</h1>
-                <p className='text-center bg-gray-100 p-4 rounded'>
-                    You must be logged in to join a private community.
-                </p>
-                <Link href='/signin'>
-                <Button className='mt-4'>Sign In</Button>
-                </Link>
-            </div>
-            </>
+           accessDenied
         )
     }
   return (

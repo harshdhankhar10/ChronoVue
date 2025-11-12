@@ -86,16 +86,15 @@ const ForgotPasswordForm = () => {
             <div className="min-h-screen flex flex-col md:flex-row bg-gray-50">
                 <div className="w-full md:w-1/2 lg:w-2/5 flex items-center justify-center p-8 md:p-12 bg-white relative">
                     <div className="max-w-md w-full text-center md:text-left">
-                        <Link href="/" className="flex items-center space-x-3 group w-fit mx-auto md:mx-0">
-                            <Image
-                                src="/final_logo.png"
-                                alt="ChronoVue Logo"
-                                width={254}
-                                height={54}
-                                className='absolute -top-16 left-12 right-0 '
-
-                            />
-                        </Link>
+                        <div className="flex items-center space-x-2 ">
+                            <Link href="/" className="flex items-center space-x-2">
+                                <Image src="/final_logo.png" alt="ChronoVue Logo"
+                                    width={50}
+                                    height={40}
+                                />
+                                <span className="font-bold text-2xl">Chrono<span className="text-primary">Vue</span></span>
+                            </Link>
+                        </div>
 
                         <h1 className="mt-12 text-3xl md:text-4xl font-bold text-gray-900 tracking-tight font-rajdhani">
                             Reset Your Password
@@ -164,9 +163,11 @@ const ForgotPasswordForm = () => {
                             </div>
 
                             <div className="mt-6">
+                                <Link href="/contact" >
                                 <Button variant="outline" className="w-full py-3 px-4 rounded-full">
                                     Contact Support
                                 </Button>
+                                </Link>
                             </div>
                         </div>
 

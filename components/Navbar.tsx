@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { getSession, signOut } from "next-auth/react";
 import { Session } from "next-auth";
+import Image from "next/image";
 
 const Navbar = () => {
 
@@ -28,13 +29,15 @@ const Navbar = () => {
 
     return (
         <nav className="fixed top-0 w-full bg-background/95 backdrop-blur-sm border-b border-border z-50 ">
-            <div className="container mx-auto px-4 lg:px-6 max-w-8xl">
+            <div className="container mx-auto px-4 lg:px-6 max-w-7xl">
                 <div className="flex items-center justify-between h-16">
-                    <div className="flex items-center space-x-2 relative -left-6">
-                        <Link href="/">
-                            <img src="/final_logo.png" alt="ChronoVue Logo"
-                                className="h-64"
+                    <div className="flex items-center space-x-2">
+                        <Link href="/" className="flex items-center space-x-2">
+                            <Image src="/final_logo.png" alt="ChronoVue Logo"
+                                width={50}
+                                height={40}
                             />
+                            <span className="font-bold text-2xl">Chrono<span className="text-primary">Vue</span></span>
                         </Link>
                     </div>
 
@@ -63,7 +66,7 @@ const Navbar = () => {
                                 Sign In
                             </Button>
                         )}
-                        <Button onClick={session ? (() => router.push('/dashboard')) : (() => router.push('/signup'))} >
+                        <Button onClick={session ? (() => router.push('/dashboard/user')) : (() => router.push('/signup'))} >
                             {session ? <span>My Dashboard</span> : <span>Start Free Trial</span>}
                         </Button>
                         {session && (

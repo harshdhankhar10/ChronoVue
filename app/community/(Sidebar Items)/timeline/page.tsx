@@ -3,12 +3,15 @@ import React from 'react'
 import prisma from '@/lib/prisma'
 import { getServerSession } from 'next-auth'
 import { NEXT_AUTH } from '@/utils/auth'
+import Link from 'next/link'
 
-const accessDenied = (
-    <div className='text-center mt-10'>
-      <h2 className='text-2xl font-bold'>Access Denied</h2>
-      <p className='mt-4'>You must be logged in to view this page.</p>
-    </div>
+export const accessDenied = (
+   <div className='h-96 flex flex-col items-center justify-center gap-6'>
+                <h1 className='text-2xl font-bold'>You need to be logged in to view this page</h1>
+                <Link href="/signin" className="px-6 py-3 bg-orange-600 text-white rounded-lg hover:bg-orange-700">
+                    Sign In
+                </Link>
+            </div>
 )
 
 const page = async () => {

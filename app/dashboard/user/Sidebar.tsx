@@ -17,6 +17,7 @@ import {
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import AIChatbotModal from '@/components/Dashboard/AI Assistant/AssistantHomepage';
+import Image from 'next/image';
 
 interface SidebarProps {
     isOpenProp?: boolean;
@@ -113,12 +114,15 @@ const Sidebar = ({ isOpenProp }: SidebarProps) => {
                     
                     <div className="absolute top-0 left-0 bottom-0 w-80 bg-white border-r border-gray-100 shadow-xl transform transition-transform">
                         <div className="flex items-center justify-between h-16 border-b border-gray-100 px-6">
-                            <div className="flex items-center space-x-3">
-                                <div className="w-8 h-8 bg-gradient-to-br from-orange-500 to-amber-500 rounded-lg flex items-center justify-center shadow-sm">
-                                    <LayoutDashboard className="w-4 h-4 text-white" />
-                                </div>
-                                <span className="font-bold text-lg text-gray-900">ChronoVue</span>
-                            </div>
+                              <div className="flex items-center space-x-2">
+                        <Link href="/" className="flex items-center space-x-2">
+                            <Image src="/final_logo.png" alt="ChronoVue Logo"
+                                width={50}
+                                height={40}
+                            />
+                            <span className="font-bold text-2xl">Chrono<span className="text-primary">Vue</span></span>
+                        </Link>
+                    </div>
                             <button
                                 onClick={() => setIsSidebarOpen(false)}
                                 className="p-2 rounded-lg hover:bg-gray-50 transition-colors"

@@ -5,6 +5,7 @@ import { getServerSession } from 'next-auth'
 import { NEXT_AUTH } from '@/utils/auth'
 import { Users, MessageCircle } from 'lucide-react'
 import { Metadata } from 'next'
+import { accessDenied } from '../timeline/page'
 
 export const metadata: Metadata = {
   title: 'My Spaces - ChronoVue Community',
@@ -17,9 +18,7 @@ const page = async () => {
   const session = await getServerSession(NEXT_AUTH)
     if (!session) {
     return (
-      <div>
-        <h2>Please sign in to view your spaces</h2>
-      </div>
+      accessDenied
     )
   }
 
