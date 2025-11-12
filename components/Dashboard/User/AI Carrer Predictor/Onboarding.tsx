@@ -12,6 +12,18 @@ interface Credits {
   credits: number;
 }
 
+export const stepperLoader = () => {
+  return (
+    <div className="flex items-center justify-center min-h-screen">
+      <div className="text-center">
+        <div className="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-32 w-32 mx-auto mb-4"></div>
+        <h2 className="text-xl font-semibold">Preparing your Career Path Setup...</h2>
+        <p className="text-gray-600 mt-2">This may take a few moments. Thank you for your patience!</p>
+      </div>
+    </div>
+  );
+};
+
 const OnboardingPage = ({credits}: Credits) => {
   const [step, setStep] = useState(1);
   const [careerGoal, setCareerGoal] = useState('');

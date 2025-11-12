@@ -75,6 +75,22 @@ export async function POST(req: NextRequest) {
         }
     });
 
+    const lastPrediction = await prisma.aICareerPredictor.findFirst({
+        where: {
+            userId: user.id
+        },
+        orderBy: {
+            createdAt: 'desc'
+        }
+    });
+
+    if (lastPrediction) {
+        const thirtyDaysInMs = 30 * 24 * 60 * 60 * 1000;
+        if (Date.now() - new Date(lastPrediction.createdAt).getTime() < thirtyDaysInMs) {
+            return NextResponse.json({ error: "You can only generate a new prediction every 30 days." }, { status: 429 });
+        }
+    }
+
     let prevVersion;
     if (isCarrerPredictorAlreadyDone) {
         prevVersion = isCarrerPredictorAlreadyDone.predictionVersion;
@@ -117,6 +133,8 @@ Salary Expectation: ${salaryExpectation}
 Additional Info: ${additionalInfo}
 `;
 
+let todayDate = new Date().toISOString().split('T')[0];
+
         const prompt = `
 You are an AI Career Coach analyzing a user's career trajectory. Based on the user's onboarding data, learning patterns, and career goals, generate a comprehensive career prediction.
 
@@ -136,6 +154,7 @@ THE INDEPTH ANALYSIS YOU PROVIDE WILL HELP THE USER TO UNDERSTAND THEIR CAREER P
 MAKE SURE THE DATES AND NUMBERS YOU PROVIDE ARE REALISTIC AND ACTIONABLE.
 THE DATA MUST NOT BE GENERIC. BASE IT ON THE USER'S CURRENT SKILL LEVELS, LEARNING PACE, AND CAREER ASPIRATIONS.
 
+Today Date: ${todayDate}, so CALCULATE DATES ACCORDINGLY.
 
 {
   "currentTimeline": 4.2,
