@@ -3,6 +3,10 @@
 import Footer from '@/components/Homepage/Footer';
 import Navbar from '@/components/Navbar';
 import React, { useState } from 'react';
+import axios from 'axios';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import Swal from 'sweetalert2';
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -13,10 +17,40 @@ const ContactPage = () => {
     message: '',
     priority: 'normal'
   });
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+    setLoading(true);
+    
+    try {
+      const response = await axios.post('/api/general/contact', {
+        ...formData
+      });
+      if (response.status === 201) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Message Sent',
+          text: response.data.message,
+        });
+        setFormData({
+          name: '',
+          email: '',
+          subject: '',
+          category: 'general',
+          message: '',
+          priority: 'normal'
+        });
+      }
+    } catch (error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'There was an error sending your message. Please try again later.',
+      });
+    }finally{
+      setLoading(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -44,14 +78,13 @@ const ContactPage = () => {
                     <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
                       Full Name *
                     </label>
-                    <input
+                    <Input
                       type="text"
                       id="name"
                       name="name"
                       required
                       value={formData.name}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
                       placeholder="Enter your full name"
                     />
                   </div>
@@ -60,14 +93,13 @@ const ContactPage = () => {
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
                       Email Address *
                     </label>
-                    <input
+                    <Input
                       type="email"
                       id="email"
                       name="email"
                       required
                       value={formData.email}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
                       placeholder="Enter your email address"
                     />
                   </div>
@@ -84,7 +116,7 @@ const ContactPage = () => {
                       required
                       value={formData.category}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-600 "
                     >
                       <option value="general">General Inquiry</option>
                       <option value="technical">Technical Support</option>
@@ -93,6 +125,7 @@ const ContactPage = () => {
                       <option value="bug">Bug Report</option>
                       <option value="partnership">Partnership</option>
                       <option value="privacy">Privacy Concern</option>
+                      <option value="privacy">Other</option>
                     </select>
                   </div>
                   
@@ -105,7 +138,7 @@ const ContactPage = () => {
                       name="priority"
                       value={formData.priority}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-600 "
                     >
                       <option value="low">Low</option>
                       <option value="normal">Normal</option>
@@ -119,14 +152,13 @@ const ContactPage = () => {
                   <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
                     Subject *
                   </label>
-                  <input
+                  <Input
                     type="text"
                     id="subject"
                     name="subject"
                     required
                     value={formData.subject}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
                     placeholder="Brief description of your inquiry"
                   />
                 </div>
@@ -142,17 +174,18 @@ const ContactPage = () => {
                     rows={6}
                     value={formData.message}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors resize-vertical"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-600 "
                     placeholder="Please provide detailed information about your inquiry, including any relevant account details, transaction IDs, or error messages..."
                   />
                 </div>
 
-                <button
+                <Button
                   type="submit"
-                  className="w-full bg-orange-600 text-white py-4 px-6 rounded-lg font-semibold hover:bg-orange-700 transition-colors focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+                  className='w-full'
+                  disabled={loading}
                 >
-                  Send Message
-                </button>
+                  {loading ? 'Sending...' : 'Submit Message'}
+                </Button>
               </form>
             </div>
           </div>

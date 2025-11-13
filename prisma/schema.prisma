@@ -658,6 +658,15 @@ model CreditUsage {
   updatedAt DateTime @updatedAt
 }
 
+model ContactUs {
+  id String @id @default(cuid())
+  fullName String
+  email String
+  category String
+  priority String
+  subject String
+  message String
+}
 
 
 
