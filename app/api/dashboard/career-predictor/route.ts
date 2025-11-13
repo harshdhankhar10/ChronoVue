@@ -498,6 +498,15 @@ IMPORTANT: Return ONLY valid JSON without any additional text or markdown. Base 
             }
         });
 
+        await prisma.creditUsage.create({
+            data: {
+                userId: user.id,
+                creditsUsed: 100,
+                type : "CAREER_PREDICTOR",
+                description: "Used 100 credits for generating career path prediction."
+            }
+        });
+
         await prisma.notification.create({
             data: {
                 userId: user.id,

@@ -1,12 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
-import { getServerSession } from "next-auth";
-import { NEXT_AUTH } from "@/utils/auth";
+import { currentLoggedInUserInfo } from "@/lib/currentLoggedInUserInfo";
 
 
 export async function POST(req:NextRequest){
-    const session = await getServerSession(NEXT_AUTH)
-    if(!session){
+    const user = await currentLoggedInUserInfo();
+    if(!user){
         return NextResponse.json({error: 'Unauthorized'}, {status: 401})
     }
     try {
@@ -15,16 +14,7 @@ export async function POST(req:NextRequest){
             return NextResponse.json({error: 'Please fill all the required fields'}, {status: 400})
         }
 
-        const user = await prisma.user.findUnique({
-            where: {
-                email: session?.user?.email || ''
-            },
-        })
-
-        if (!user) {
-            return NextResponse.json({error: 'User not found'}, {status: 404})
-        }
-
+        
         await prisma.mileStone.create({
             data: {
                 title,
@@ -35,6 +25,15 @@ export async function POST(req:NextRequest){
                 tags,
                 timelineId: timelineID,
                 userId: user.id
+            }
+        })
+
+        await prisma.creditUsage.create({
+            data: {
+                userId: user.id,
+                creditsUsed: 5,
+                type : 'ADD_MILESTONE',
+                description: `Used 5 credits for adding a milestone on timeline ID: ${timelineID}`
             }
         })
 

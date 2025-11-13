@@ -58,6 +58,15 @@ RESPOND ONLY WITH THE ANSWER TEXT, no additional formatting or explanations.
             }
         });
 
+        await prisma?.creditUsage.create({
+            data: {
+                userId: user.id,
+                creditsUsed: 5,
+                type : "CAREER_PREDICTOR_AI_CHAT",
+                description: "Used 5 credits for Career Predictor AI Chat response"
+            }
+        });
+
         return NextResponse.json({
             message : "Response generated successfully",
             response: aiResponse,

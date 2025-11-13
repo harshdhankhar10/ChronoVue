@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { GoogleGenAI } from '@google/genai';
 import prisma from "@/lib/prisma";
+import { currentLoggedInUserInfo } from "@/lib/currentLoggedInUserInfo";
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY || '';
 
@@ -9,6 +10,14 @@ const ai = new GoogleGenAI({
 })
 
 export async function POST(req: NextRequest) {
+    const user = await currentLoggedInUserInfo();
+    if (!user) {
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    if (user?.credits < 20) {
+        return NextResponse.json({ error: "Insufficient credits. AI services require at least 20 credits." }, { status: 402 });
+    }
 
     if (!GEMINI_API_KEY) {
         return NextResponse.json({ error: 'AI service currently unavailable' }, { status: 503 });
@@ -94,6 +103,15 @@ Return only the JSON and nothing else. Do not include preambles, explanations, o
                 ai_suggestions: {
                     push: parsedMessage
                 }
+            }
+        })
+
+        await prisma.creditUsage.create({
+            data: {
+                userId: user.id,
+                creditsUsed: 20,
+                type : 'AI_SUGGESTION',
+                description: `Used 20 credits for AI suggestion on timeline ID: ${timelineID}`
             }
         })
 

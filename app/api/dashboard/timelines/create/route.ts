@@ -1,15 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
-import { getServerSession } from "next-auth";
-import { NEXT_AUTH } from "@/utils/auth";
-
+import { currentLoggedInUserInfo } from "@/lib/currentLoggedInUserInfo";
 
 export async function POST(req: NextRequest) {
-    const session = await getServerSession(NEXT_AUTH);
-    if (!session) {
-        return NextResponse.json({ error: "UnAuthorized!" }, { status: 500 })
+    const user = await currentLoggedInUserInfo();
+
+    if (!user) {
+        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
-    const user = session?.user;
+    if (user?.credits < 10) {
+        return NextResponse.json({ error: "Insufficient credits. Minimum 10 credits required to create a timeline." }, { status: 403 });
+    }
     try {
         const { timeline, milestones, action } = await req.json();
 
@@ -50,6 +51,15 @@ export async function POST(req: NextRequest) {
                 userId: user.id,
             }))
         })
+
+        await prisma.creditUsage.create({
+            data: {
+                userId: user.id,
+                creditsUsed: 10,
+                type: "TIMELINE_CREATION",
+                description: "Used 10 credits for creating a new timeline"
+            }
+        });
 
         return NextResponse.json({ message: "Your timeline has been created successfully!" }, { status: 201 })
 

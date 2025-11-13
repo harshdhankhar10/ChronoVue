@@ -256,6 +256,15 @@ Keep language positive, motivating, and practical. Avoid technical jargon.
             }
         });
 
+        await prisma.creditUsage.create({
+            data: {
+                userId: user.id,
+                creditsUsed: 50,
+                type: 'AI_INSIGHT',
+                description: 'Credits used for AI Insight generation'
+            }
+        });
+
             await prisma.notification.create({
                 data : {
                     userId: user.id,

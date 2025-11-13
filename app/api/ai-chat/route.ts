@@ -121,6 +121,15 @@ Guidelines:
             data: { credits: { decrement: 5 } }
         });
 
+        await prisma.creditUsage.create({
+            data : {
+                userId: user.id,
+                creditsUsed: 5,
+                type : 'AI_CHAT',
+                description: 'Credits used for AI Chat interaction'
+            }
+        })
+
 
         return NextResponse.json({
             success: true,

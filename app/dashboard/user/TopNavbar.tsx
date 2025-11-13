@@ -10,7 +10,8 @@ import {
     MessageSquare,
     ChevronDown,
     X,
-    CreditCard
+    CreditCard,
+    Coins
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
@@ -150,6 +151,10 @@ const TopNavbar = ({userInfo, notifications}: TopNavbarProps) => {
                                         <Link href="/dashboard/user/settings/transactions-history" className="flex items-center space-x-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors duration-200 rounded-lg mx-2">
                                             <CreditCard className="w-4 h-4" />
                                             <span>Transactions History</span>
+                                        </Link>
+                                        <Link href="/dashboard/user/settings/credits-usage" className="flex items-center space-x-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors duration-200 rounded-lg mx-2">
+                                            <Coins className="w-4 h-4" />
+                                            <span>Credits Usage History</span>
                                         </Link>
                                     </div>
                                     <div className="border-t border-gray-100 pt-2 mx-4">
