@@ -298,6 +298,15 @@ Remember: Keep it real, keep it helpful, and make sure they walk away knowing ex
             }
         })
 
+        await prisma.creditUsage.create({
+            data : {
+              userId: user.id,
+              creditsUsed: 35,
+              type: "Market Skills Analysis",
+              description: `Deducted 35 credits for generating market skills analysis.`,
+            }
+        })
+
      return NextResponse.json({
         message : 'Market skills analysis generated successfully',
      }, {status: 201})
