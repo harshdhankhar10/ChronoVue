@@ -28,7 +28,7 @@ const page = async ({ params }: any) => {
   }
   return (
     <>
-        <ViewSpecificUser user={user} />
+        <ViewSpecificUser />
     </>
   )
 }
