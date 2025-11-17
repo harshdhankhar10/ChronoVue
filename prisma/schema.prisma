@@ -47,7 +47,7 @@ model User {
   notifications Notification[]
   aiCareerPredictor AICareerPredictor?
   creditUsages CreditUsage[]
-
+  marketSkillsAnalysis MarketSkillsAnalysis[] 
 
 
 
@@ -668,8 +668,41 @@ model ContactUs {
   message String
 }
 
+model MarketSkillsAnalysis {
+  id String @id @default(cuid())
+  user User @relation(fields: [userId], references: [id])
+  userId String
 
+  // User's skill Assessment 
+  userSkills Json @default("{}")
+  skillLevels Json @default("{}")
+  learningVelocity Json @default("{}")
 
+  // Market Analysis Data
+  skillDemandData Json @default("{}")
+  salaryImpactData Json @default("{}")
+  trendAnalysis Json @default("{}")
+  geographyData Json @default("{}")
 
+  // Personalization
+  skillGapValue Json @default("{}")
+  learningROI Json @default("{}")
+  optimalCombinations Json @default("{}")
+  opportunityCost Json @default("{}")
 
+  // Visualizations Data
+  chartData Json @default("{}")
+  heatmapData Json @default("{}")
+  comparisonData Json @default("{}")
+  projectionData Json @default("{}")
 
+    // AI Insights
+  personalizedInsights Json @default("{}")
+  recommendationEngine Json @default("{}")
+  successPatterns Json @default("{}")
+  riskAssessment Json @default("{}")
+
+  version String @default("v1.0")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

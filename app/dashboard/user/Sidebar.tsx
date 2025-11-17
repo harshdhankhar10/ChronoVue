@@ -12,7 +12,8 @@ import {
     MessageSquare,
     X,
     Menu,
-    Target
+    Target,
+    Lightbulb
 } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
@@ -34,13 +35,14 @@ const Sidebar = ({ isOpenProp }: SidebarProps) => {
         { isNew : false, id: 'create', icon: PlusSquare, label: 'Create Timeline', link: '/dashboard/user/timelines/create' },
         { isNew : false, id: 'ai-insights', icon: Brain, label: 'AI Insights', link: '/dashboard/user/ai-insights' },
         { isNew : true, id: 'Career Predictor', icon: Target, label: 'Career Predictor', link: '/dashboard/user/career-predictor' },
+        { isNew : true, id: 'Market Skills Analysis', icon: Lightbulb, label: 'Market Skills Analysis', link: '/dashboard/user/market-skills-analysis' },
         { isNew : false, id: 'journal', icon: BookOpen, label: 'Journal', link: '/dashboard/user/journal' },
         { isNew : false, id: 'mentor', icon: Users, label: 'Mentor Connect', link: '/dashboard/user/mentor' },
         { isNew : false, id: 'community', icon: Users, label: 'Community', link: '/dashboard/user/community/' },
         { isNew : false, id: 'resources', icon: Bookmark, label: 'Resources', link: '/dashboard/user/resources' }
     ];
 
-    const NavItem = ({ item, isActive }: { item: any; isActive: boolean }) => {
+    const NavItem = ({ item, isActive, isNew }: { item: any; isActive: boolean; isNew: boolean }) => {
         const Icon = item.icon;
 
         return (
@@ -50,10 +52,16 @@ const Sidebar = ({ isOpenProp }: SidebarProps) => {
                         isActive
                             ? 'bg-orange-500 text-white shadow-md'
                             : 'text-gray-600 hover:bg-orange-50 hover:text-orange-600'
-                    }`}
+                    }
+                    `}
                 >
                     <Icon className="w-5 h-5 transition-transform group-hover:scale-110" />
                     <span className="font-medium text-sm">{item.label}</span>
+                    {isNew && (
+                        <span className="ml-auto bg-red-100 text-red-800 text-xs font-semibold px-2 py-0.5 rounded-full">
+                            New
+                        </span>
+                    )}
                 </div>
             </Link>
         );
@@ -79,6 +87,7 @@ const Sidebar = ({ isOpenProp }: SidebarProps) => {
                                 <NavItem
                                     item={item}
                                     isActive={activeItem === item.id}
+                                    isNew={item.isNew}
                                 />
                             </div>
                         ))}
@@ -143,6 +152,7 @@ const Sidebar = ({ isOpenProp }: SidebarProps) => {
                                     <NavItem
                                         item={item}
                                         isActive={activeItem === item.id}
+                                        isNew={item.isNew}
                                     />
                                 </div>
                             ))}

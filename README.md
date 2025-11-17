@@ -1,4 +1,3 @@
-
 # ChronoVue
 
 ChronoVue is an **AI-powered future timeline platform**. The goal of this project is to help people **plan, track, and visualize their life, career, or learning goals** in a simple but powerful way.
@@ -45,6 +44,16 @@ ChronoVue is your **personal roadmap builder** that helps you:
 - **Resource Hub** - Curated learning materials and personalized recommendations
 - **Learning Paths** - Structured resource collections for skill development
 
+### **Market Skills Analysis** 🆕
+- **Comprehensive Skill Assessment** - Detailed analysis of current skill levels and market demand
+- **Salary Impact Analysis** - See which skills boost your earning potential the most
+- **Skill Gap Identification** - Quick wins vs high-value long-term investments
+- **Market Demand Trends** - Real-time data on growing, stable, and declining skills
+- **Learning ROI Calculator** - Best investments for maximum career growth
+- **Interactive Visualizations** - Charts and heatmaps for easy understanding
+- **Personalized Roadmaps** - Custom learning paths based on your goals
+- **PDF Export** - Download complete analysis reports
+
 ### **Community & Social**
 - **Community Spaces** - Public/private communities with various engagement options
 - **Content Sharing** - Posts, timeline shares, and milestone celebrations
@@ -77,6 +86,7 @@ ChronoVue is your **personal roadmap builder** that helps you:
 * **NextAuth** - Authentication system
 * **TypeScript** - Type safety and scalability
 * **Google Gemini AI** - AI-powered insights and assistance
+* **Recharts** - Interactive data visualizations 
 
 ---
 
@@ -103,6 +113,7 @@ ChronoVue is your **personal roadmap builder** that helps you:
  ┃ ┣ /Dashboard
  ┃ ┣ /AI Assistant
  ┃ ┣ /AI Insights
+ ┃ ┣ /MarketSkillsAnalysis 
  ┃ ┣ /Mentor
  ┃ ┣ /Timelines
  ┃ ┣ /Homepage
@@ -135,6 +146,7 @@ ChronoVue is your **personal roadmap builder** that helps you:
 6. Community Spaces
 7. Resource Hub
 8. ChronoAI Assistant
+9. **Market Skills Analysis** 🆕
 
 ### 🔄 **In Progress**
 1. Mentorship Matching System
@@ -199,12 +211,42 @@ MIT License — Free to use and modify.
 
 ## 🎉 Latest Updates
 
-**Version 1.2** - Major Feature Release
-- ✅ Added comprehensive AI Insights dashboard with end to end analytics
-- ✅ Implemented ChronoAI Assistant across all pages
-- ✅ Launched Resource Hub with learning paths
-- ✅ Enhanced timeline functionality - create directly from AI Insights Dashboard
-- ✅ Improved UI/UX with modern design system
-- ✅ Added in app notifications system
+**Version 1.3** - Market Skills Analysis Release 🆕
+- ✅ **Complete Market Skills Analysis** - End-to-end career growth analytics
+- ✅ **Interactive Data Visualizations** - Charts, graphs, and heatmaps using Recharts
+- ✅ **Salary Impact Calculator** - See exactly which skills increase your earning potential
+- ✅ **Skill Gap Analysis** - Identify quick wins vs high-value investments
+- ✅ **Market Demand Tracking** - Real-time data on skill trends and opportunities
+- ✅ **Learning ROI Analysis** - Smart recommendations for maximum career growth
+- ✅ **PDF Export Functionality** - Download professional analysis reports
+- ✅ **Personalized Roadmaps** - Custom learning paths based on your skill profile
+- ✅ Enhanced AI Insights dashboard with comprehensive analytics
+- ✅ Improved UI/UX with modern data visualization components
 
+---
+
+## 🔍 About Market Skills Analysis
+
+The new **Market Skills Analysis** feature helps you make smart career decisions by showing:
+
+**📊 What it does:**
+- Analyzes your current skill levels across technologies
+- Compares them with market demand and salary data
+- Identifies skill gaps that are holding you back
+- Shows which skills give the biggest salary boost
+- Provides personalized learning recommendations
+
+**🎯 Why it matters:**
+- Stop guessing which skills to learn next
+- Focus on high-value skills that employers want
+- See exactly how much each skill can increase your salary
+- Get a clear roadmap for career growth
+- Make data-driven learning decisions
+
+**💡 Key Benefits:**
+- **Save Time**: Learn the right skills at the right time
+- **Earn More**: Focus on skills with highest salary impact  
+- **Stay Relevant**: Track market trends and demand shifts
+- **Plan Smart**: Get personalized learning roadmaps
+- **Track Progress**: Monitor your skill development over time
 

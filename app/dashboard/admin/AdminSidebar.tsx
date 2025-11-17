@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 
 const links = [
   { name: "Dashboard", href: "/dashboard/admin", icon: LayoutDashboard },
-  { name: "Users", href: "/dashboard/admin/users", icon: Users },
+  { name: "Users", href: "/dashboard/admin/users?page=1", icon: Users },
   { name: "Analytics", href: "/dashboard/admin/analytics", icon: BarChart3 },
   { name: "Mentor Applications", href: "/dashboard/admin/mentor-applications", icon: Users },
   { name: "Settings", href: "/dashboard/admin/settings", icon: Settings },
@@ -24,7 +24,13 @@ export default function AdminSidebar() {
         <div className="p-6 text-2xl font-bold">Admin Dashboard</div>
         <nav className="flex flex-col">
           {links.map(({ name, href, icon: Icon }) => {
-            const active = pathname === href;
+            let active = pathname === href;
+            if (name === "Users" && pathname.startsWith("/dashboard/admin/users")) {
+              active = true;
+            }
+            if (name === "Mentor Applications" && pathname.startsWith("/dashboard/admin/mentor-applications")) {
+              active = true;
+            }
             return (
               <Link
                 key={name}
