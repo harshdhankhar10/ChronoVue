@@ -19,7 +19,7 @@ model User {
   status         AccountStatus @default(INACTIVE)
   isVerified     Boolean       @default(false)
   lastLogin      DateTime?
-  credits        Int           @default(5)
+  credits        Int           @default(40)
   profilePicture String        @default("https://www.mauicardiovascularsymposium.com/wp-content/uploads/2019/08/dummy-profile-pic-300x300.png")
 
   createdAt  DateTime    @default(now())
