@@ -30,19 +30,19 @@ const Sidebar = ({ isOpenProp }: SidebarProps) => {
     const [isAiModalOpen, setIsAiModalOpen] = useState(false);
 
     const navigationItems = [
-        { isNew : false, id: 'dashboard', icon: LayoutDashboard, label: 'Dashboard', link: '/dashboard/user' },
-        { isNew : false, id: 'timelines', icon: GitBranch, label: 'My Timelines', link: '/dashboard/user/timelines' },
-        { isNew : false, id: 'create', icon: PlusSquare, label: 'Create Timeline', link: '/dashboard/user/timelines/create' },
-        { isNew : false, id: 'ai-insights', icon: Brain, label: 'AI Insights', link: '/dashboard/user/ai-insights' },
-        { isNew : true, id: 'Career Predictor', icon: Target, label: 'Career Predictor', link: '/dashboard/user/career-predictor' },
-        { isNew : true, id: 'Market Skills Analysis', icon: Lightbulb, label: 'Market Skills Analysis', link: '/dashboard/user/market-skills-analysis' },
-        { isNew : false, id: 'journal', icon: BookOpen, label: 'Journal', link: '/dashboard/user/journal' },
-        { isNew : false, id: 'mentor', icon: Users, label: 'Mentor Connect', link: '/dashboard/user/mentor' },
-        { isNew : false, id: 'community', icon: Users, label: 'Community', link: '/dashboard/user/community/' },
-        { isNew : false, id: 'resources', icon: Bookmark, label: 'Resources', link: '/dashboard/user/resources' }
+        { isCompleted: true, isNew : false, id: 'dashboard', icon: LayoutDashboard, label: 'Dashboard', link: '/dashboard/user' },
+        {isCompleted: true, isNew : false, id: 'timelines', icon: GitBranch, label: 'My Timelines', link: '/dashboard/user/timelines' },
+        {isCompleted: true, isNew : false, id: 'create', icon: PlusSquare, label: 'Create Timeline', link: '/dashboard/user/timelines/create' },
+        {isCompleted: true, isNew : false, id: 'ai-insights', icon: Brain, label: 'AI Insights', link: '/dashboard/user/ai-insights' },
+        { isCompleted: true, isNew : true, id: 'Career Predictor', icon: Target, label: 'Career Predictor', link: '/dashboard/user/career-predictor' },
+        { isCompleted: true, isNew : true, id: 'Market Skills Analysis', icon: Lightbulb, label: 'Market Skills Analysis', link: '/dashboard/user/market-skills-analysis' },
+        {isCompleted: true, isNew : false, id: 'journal', icon: BookOpen, label: 'Journal', link: '/dashboard/user/journal' },
+        // {isCompleted: false, isNew : false, id: 'mentor', icon: Users, label: 'Mentor Connect', link: '/dashboard/user/mentor' },
+        {isCompleted: true, isNew : false, id: 'community', icon: Users, label: 'Community', link: '/dashboard/user/community/' },
+        {isCompleted: true, isNew : false, id: 'resources', icon: Bookmark, label: 'Resources', link: '/dashboard/user/resources' }
     ];
 
-    const NavItem = ({ item, isActive, isNew }: { item: any; isActive: boolean; isNew: boolean }) => {
+    const NavItem = ({ item, isActive, isNew, isCompleted }: { item: any; isActive: boolean; isNew: boolean; isCompleted: boolean }) => {
         const Icon = item.icon;
 
         return (
@@ -56,12 +56,21 @@ const Sidebar = ({ isOpenProp }: SidebarProps) => {
                     `}
                 >
                     <Icon className="w-5 h-5 transition-transform group-hover:scale-110" />
-                    <span className="font-medium text-sm">{item.label}</span>
+                   <div className="flex items-center w-full">
+                     <span className="font-medium text-sm">{item.label}</span>
+                    {!isCompleted && (
+                        <span className="text-center ml-auto bg-gray-200 text-gray-500 text-xs font-semibold px-2 py-0.5 rounded-full">
+                            Coming Soon
+                        </span>
+                    )}
+                   </div>
+
                     {isNew && (
                         <span className="ml-auto bg-red-100 text-red-800 text-xs font-semibold px-2 py-0.5 rounded-full">
                             New
                         </span>
                     )}
+                    
                 </div>
             </Link>
         );
@@ -88,6 +97,7 @@ const Sidebar = ({ isOpenProp }: SidebarProps) => {
                                     item={item}
                                     isActive={activeItem === item.id}
                                     isNew={item.isNew}
+                                    isCompleted={item.isCompleted}
                                 />
                             </div>
                         ))}
@@ -153,6 +163,7 @@ const Sidebar = ({ isOpenProp }: SidebarProps) => {
                                         item={item}
                                         isActive={activeItem === item.id}
                                         isNew={item.isNew}
+                                        isCompleted={item.isCompleted}
                                     />
                                 </div>
                             ))}
