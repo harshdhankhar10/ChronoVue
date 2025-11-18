@@ -8,8 +8,8 @@ export async function POST(req: NextRequest) {
     if (!user) {
         return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
-    if (user?.credits < 10) {
-        return NextResponse.json({ error: "Insufficient credits. Minimum 10 credits required to create a timeline." }, { status: 403 });
+    if (user?.credits < 5) {
+        return NextResponse.json({ error: "Insufficient credits. Minimum 5 credits required to create a timeline." }, { status: 403 });
     }
     try {
         const { timeline, milestones, action } = await req.json();
@@ -55,11 +55,19 @@ export async function POST(req: NextRequest) {
         await prisma.creditUsage.create({
             data: {
                 userId: user.id,
-                creditsUsed: 10,
+                creditsUsed: 5,
                 type: "TIMELINE_CREATION",
-                description: "Used 10 credits for creating a new timeline"
+                description: "Used 5 credits for creating a new timeline"
             }
         });
+
+        await prisma.notification.create({
+            data : {
+                userId: user.id,
+                title: 'Timeline Created',
+                message: `5 credits have been deducted for creating a new timeline.`,
+            }
+        })
 
         return NextResponse.json({ message: "Your timeline has been created successfully!" }, { status: 201 })
 

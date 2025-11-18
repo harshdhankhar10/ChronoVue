@@ -39,12 +39,12 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: 'User not found' }, { status: 404 });
         }
 
-        if (userInfo.credits < 5) {
+        if (userInfo.credits < 2) {
             const res = await prisma.notification.create({
                 data : {
                     userId: user.id,
                     title: 'Insufficient Credits',
-                    message: 'You must have at least 5 credits to use the AI Assistant',
+                    message: 'You must have at least 2 credits to use the AI Assistant',
                 }
             })
             return NextResponse.json({ error: 'Insufficient credits' }, { status: 400 });
@@ -124,7 +124,7 @@ Guidelines:
         await prisma.creditUsage.create({
             data : {
                 userId: user.id,
-                creditsUsed: 5,
+                creditsUsed: 2,
                 type : 'AI_CHAT',
                 description: 'Credits used for AI Chat interaction'
             }
@@ -134,8 +134,8 @@ Guidelines:
         return NextResponse.json({
             success: true,
             data: parsedResponse,
-            creditsUsed: 5,
-            creditsRemaining: userInfo.credits - 5
+            creditsUsed: 2,
+            creditsRemaining: userInfo.credits - 2
         });
 
     } catch (error) {

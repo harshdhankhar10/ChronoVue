@@ -13,8 +13,8 @@ export async function POST(req: NextRequest) {
     if (!user) {
         return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
-    if(user.credits < 5){
-        return NextResponse.json({ error: "Insufficient credits. AI services require at least 5 credits." }, { status: 402 });
+    if(user.credits < 2){
+        return NextResponse.json({ error: "Insufficient credits. AI services require at least 2 credits." }, { status: 402 });
     }
 
     try {
@@ -54,16 +54,16 @@ RESPOND ONLY WITH THE ANSWER TEXT, no additional formatting or explanations.
         await prisma?.user.update({
             where: { id: user.id },
             data: {
-                credits : {decrement: 5}
+                credits : {decrement: 2}
             }
         });
 
         await prisma?.creditUsage.create({
             data: {
                 userId: user.id,
-                creditsUsed: 5,
+                creditsUsed: 2,
                 type : "CAREER_PREDICTOR_AI_CHAT",
-                description: "Used 5 credits for Career Predictor AI Chat response"
+                description: "Used 2 credits for Career Predictor AI Chat response"
             }
         });
 

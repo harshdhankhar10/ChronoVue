@@ -4,6 +4,13 @@ import { getServerSession } from "next-auth";
 import { NEXT_AUTH } from "@/utils/auth";
 
 export async function POST(req: NextRequest){
+    let isDisabled = true;
+    if(isDisabled){
+        return NextResponse.json(
+            { error: "Mentor applications are currently closed. Please check back later." }, 
+            { status: 503 }
+        );
+    }
     const session = await getServerSession(NEXT_AUTH);
     if(!session){
         return NextResponse.json({error: "Unauthorized"}, {status: 401});

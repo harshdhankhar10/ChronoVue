@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 
 
 interface User {
-    credits : number;
+    credits: number;
 }
 
 interface UserProps {
@@ -16,26 +16,29 @@ interface UserProps {
 
 
 
-const CreditsBuyHomepage = ({user}:UserProps) => {
+const CreditsBuyHomepage = ({ user }: UserProps) => {
     const [loading, setLoading] = useState(false);
     const router = useRouter();
 
 
     const creditPacks = [
-        { id: 1, credits: 50, price: 99, popular: false },
-        { id: 2, credits: 120, price: 199, popular: true },
-        { id: 3, credits: 300, price: 399, popular: false }
-    ]
+        { id: 1, credits: 60, price: 99, popular: false },
+        { id: 2, credits: 180, price: 249, popular: true },
+        { id: 3, credits: 450, price: 499, popular: false }
+    ];
 
     const features = [
-        { id : 1, name: 'Timeline Generation', credits: 10 },
-        { id: 2, name: 'AI Insight Generation', credits: 15 },
-        { id: 3, name: 'AI Chat Messages', credits: 5 },
-        { id: 4, name: 'Skill Gap Analysis', credits: 8 },
-        { id: 5, name: 'Progress Predictions', credits: 10 }
-    ]
+        { id: 1, name: 'Timeline Generation', credits: 5, },
+        { id: 2, name: 'AI Insight Generation', credits: 25, },
+        { id: 3, name: 'AI Chat Message', credits: 2, },
+        { id: 4, name: 'AI Career Predictor', credits: 60, },
+        { id: 5, name: 'Skill Gap Analysis', credits: 15, },
+        { id: 6, name: 'Progress Predictions', credits: 10, },
+        { id: 7, name: 'Market Skills Analysis', credits: 60, },
+        { id: 8, name: 'Milestone Generation', credits: 5, },
+    ];
 
-    
+
     const loadRazorpay = () => {
         return new Promise((resolve) => {
             if (typeof window === 'undefined') {
@@ -60,7 +63,7 @@ const CreditsBuyHomepage = ({user}:UserProps) => {
         setLoading(true);
         try {
             const response = await axios.post('/api/dashboard/credits/buy', {
-                credit : credits,
+                credit: credits,
                 amount
             });
 
@@ -85,7 +88,7 @@ const CreditsBuyHomepage = ({user}:UserProps) => {
                             razorpay_payment_id: razorpayResponse.razorpay_payment_id,
                             razorpay_signature: razorpayResponse.razorpay_signature,
                             paymentId: orderData.paymentId,
-                            creditsAdded : credits
+                            creditsAdded: credits
                         });
 
                         const verificationData = verificationResponse.data;
@@ -154,13 +157,12 @@ const CreditsBuyHomepage = ({user}:UserProps) => {
 
                 <div className="grid md:grid-cols-3 gap-6 mb-12">
                     {creditPacks.map((pack, index) => (
-                        <div 
+                        <div
                             key={index}
-                            className={`bg-white rounded-2xl p-6 shadow-sm border-2 ${
-                                pack.popular 
-                                    ? 'border-orange-500 relative' 
-                                    : 'border-gray-200'
-                            }`}
+                            className={`bg-white rounded-2xl p-6 shadow-sm border-2 ${pack.popular
+                                ? 'border-orange-500 relative'
+                                : 'border-gray-200'
+                                }`}
                         >
                             {pack.popular && (
                                 <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-orange-500 text-white px-4 py-1 rounded-full text-sm font-medium">
@@ -181,13 +183,13 @@ const CreditsBuyHomepage = ({user}:UserProps) => {
                                     ₹{(pack.price / pack.credits).toFixed(2)} per credit
                                 </div>
                             </div>
-                            <Button onClick={()=> handlePurchase(pack.credits, pack.price)} className="w-full h-12" disabled={loading}>
+                            <Button onClick={() => handlePurchase(pack.credits, pack.price)} className="w-full h-12" disabled={loading}>
                                 Buy Now
                             </Button>
                         </div>
                     ))}
                 </div>
-                
+
 
                 <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-200">
                     <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
@@ -197,6 +199,7 @@ const CreditsBuyHomepage = ({user}:UserProps) => {
                         {features.map((feature, index) => (
                             <div key={index} className="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
                                 <div className="text-gray-900 font-medium">{feature.name}</div>
+
                                 <div className="flex items-center space-x-2">
                                     <span className="text-orange-600 font-bold">{feature.credits}</span>
                                     <span className="text-gray-500 text-sm">credits</span>
@@ -229,7 +232,7 @@ const CreditsBuyHomepage = ({user}:UserProps) => {
                     </div>
                 </div>
 
-              
+
             </div>
         </div>
     )

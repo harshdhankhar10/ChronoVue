@@ -14,6 +14,14 @@ let otpData = {
 
 
 export async function POST(req: NextRequest) {
+        let isDisabled = true;
+        if(isDisabled){
+            return NextResponse.json(
+                { error: "Mentor applications are currently closed. Please check back later." }, 
+                { status: 503 }
+            );
+        }
+    
     try {
         const { email } = await req.json();
         if (!email || email.trim() === '') {

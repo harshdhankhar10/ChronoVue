@@ -57,8 +57,8 @@ export async function POST(req: NextRequest){
         if(userInfo.Journal.length < 2){
             return NextResponse.json({error: 'At least 2 journal entries are required'}, {status: 400});
         }
-        if(userInfo.credits < 50){
-            return NextResponse.json({error: 'You must have at least 50 credits'}, {status: 400});
+        if(userInfo.credits < 25){
+            return NextResponse.json({error: 'You must have at least 25 credits'}, {status: 400});
         }
 
         const lastInsight = userInfo.AIInsights[0];
@@ -245,21 +245,21 @@ Keep language positive, motivating, and practical. Avoid technical jargon.
                 riskAnalysis: parsedResponse.riskAnalysis,
                 skillGaps: parsedResponse.skillGaps,
                 totalActionItems: parsedResponse.recommendations.length,
-                creditsUsed: 50
+                creditsUsed: 25
             }
         });
 
         await prisma.user.update({
             where: { id: user.id },
             data: {
-                credits: { decrement: 50 },
+                credits: { decrement: 25 },
             }
         });
 
         await prisma.creditUsage.create({
             data: {
                 userId: user.id,
-                creditsUsed: 50,
+                creditsUsed: 25,
                 type: 'AI_INSIGHT',
                 description: 'Credits used for AI Insight generation'
             }
@@ -269,22 +269,11 @@ Keep language positive, motivating, and practical. Avoid technical jargon.
                 data : {
                     userId: user.id,
                     title: generationMethod === 'USER_ACTION' ? 'AI Insight Generated' : 'Weekly AI Insight Generated',
-                    message: generationMethod === 'USER_ACTION' ? `Your AI Insight has been generated successfully. You have ${userInfo.credits - 50} credits remaining.` : `Your weekly AI Insight has been generated successfully. You have ${userInfo.credits - 50} credits remaining.`,
+                    message: generationMethod === 'USER_ACTION' ? `Your AI Insight has been generated successfully. You have ${userInfo.credits - 25} credits remaining.` : `Your weekly AI Insight has been generated successfully. You have ${userInfo.credits - 25} credits remaining.`,
                 }
             })
         
-        
-
-        if(userInfo.credits < 50){
-            await prisma.notification.create({
-                data : {
-                    userId: user.id,
-                    title: 'Insufficient Credits',
-                    message: 'You must have at least 50 credits to generate insights',
-                }
-            })
-        }
-
+    
         
 
         return NextResponse.json({ 

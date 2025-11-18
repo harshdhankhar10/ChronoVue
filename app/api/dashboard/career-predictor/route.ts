@@ -27,8 +27,8 @@ export async function POST(req: NextRequest) {
         }
     });
 
-    if (userInfo?.credits! < 100) {
-        return NextResponse.json({ error: "Insufficient credits. Please purchase more credits to use the Career Predictor feature." }, { status: 402 });
+    if (userInfo?.credits! < 60) {
+        return NextResponse.json({ error: "Insufficient credits. You need at least 60 credits to use the Career Predictor." }, { status: 400 });
     }
 
     const timelines = await prisma.timeline.findMany({
@@ -494,16 +494,16 @@ IMPORTANT: Return ONLY valid JSON without any additional text or markdown. Base 
                 id: user.id
             },
             data: {
-                credits: { decrement: 100 }
+                credits: { decrement: 60 }
             }
         });
 
         await prisma.creditUsage.create({
             data: {
                 userId: user.id,
-                creditsUsed: 100,
+                creditsUsed: 60,
                 type : "CAREER_PREDICTOR",
-                description: "Used 100 credits for generating career path prediction."
+                description: "Used 60 credits for generating career path prediction."
             }
         });
 
@@ -511,7 +511,7 @@ IMPORTANT: Return ONLY valid JSON without any additional text or markdown. Base 
             data: {
                 userId: user.id,
                 title: "Career Predictor Generated",
-                message: "Your career path prediction has been generated successfully using 100 credits.",
+                message: "Your career path prediction has been generated successfully using 60 credits.",
                 type : "INFO",
             }
         });

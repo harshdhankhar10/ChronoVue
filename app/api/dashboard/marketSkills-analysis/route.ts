@@ -27,10 +27,15 @@ export async function POST(req: NextRequest){
         }
     });
 
-    if (userInfo?.credits! < 35) {
-        return NextResponse.json({ error: "Insufficient credits. Please purchase more credits to use this feature." }, { status: 402 });
+    if (userInfo?.credits! < 60) {
+        return NextResponse.json({ error: "Insufficient credits. Market Skills Analysis requires at least 60 credits." }, { status: 402 });
     }
 
+      const userProfile = await prisma.profile.findUnique({
+        where: {
+            userId: user.id
+        }
+    });
     const timelines = await prisma.timeline.findMany({
         where: {
             userId: user.id
@@ -100,6 +105,15 @@ USER'S CURRENT SITUATION:
 - Current goals and aspirations
 
 TODAY'S DATE: ${todayDate}
+
+You have to analyze the market trends according to the user data: 
+Here is the user data: 
+Profile Info: ${JSON.stringify(userProfile)}
+Timelines: ${JSON.stringify(timelines)}
+Main Onboarding Data: ${JSON.stringify(mainOnboardingData)}
+Milestones: ${JSON.stringify(milestones)}
+Previous AI Insights: ${JSON.stringify(prevAIInsights)}
+Journals: ${JSON.stringify(journals)}
 
 Here's what I want you to do:
 
@@ -286,14 +300,14 @@ Remember: Keep it real, keep it helpful, and make sure they walk away knowing ex
 
          await prisma.user.update({
             where: { id: user.id },
-            data: { credits: { decrement: 35 } }
+            data: { credits: { decrement: 60 } }
         });
 
         await prisma.notification.create({
             data: {
                 userId: user.id,
                 type : 'INFO',
-                message: `35 credits have been deducted for generating a market skills analysis.`,
+                message: `60 credits have been deducted for generating a market skills analysis.`,
                 title: 'Market Skills Analysis Generated',
             }
         })
@@ -301,9 +315,9 @@ Remember: Keep it real, keep it helpful, and make sure they walk away knowing ex
         await prisma.creditUsage.create({
             data : {
               userId: user.id,
-              creditsUsed: 35,
+              creditsUsed: 60,
               type: "Market Skills Analysis",
-              description: `Deducted 35 credits for generating market skills analysis.`,
+              description: `Deducted 60 credits for generating market skills analysis.`,
             }
         })
 

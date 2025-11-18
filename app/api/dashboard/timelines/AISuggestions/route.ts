@@ -15,8 +15,8 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    if (user?.credits < 20) {
-        return NextResponse.json({ error: "Insufficient credits. AI services require at least 20 credits." }, { status: 402 });
+    if (user?.credits < 25) {
+        return NextResponse.json({ error: "Insufficient credits. AI services require at least 25 credits." }, { status: 402 });
     }
 
     if (!GEMINI_API_KEY) {
@@ -105,13 +105,26 @@ Return only the JSON and nothing else. Do not include preambles, explanations, o
                 }
             }
         })
-
+        await prisma.user.update({
+            where: { id: user.id },
+            data: {
+                credits : {decrement: 25}
+            }
+        });
         await prisma.creditUsage.create({
             data: {
                 userId: user.id,
-                creditsUsed: 20,
+                creditsUsed: 25,
                 type : 'AI_SUGGESTION',
-                description: `Used 20 credits for AI suggestion on timeline ID: ${timelineID}`
+                description: `Used 25 credits for AI suggestion on timeline ID: ${timelineID}`
+            }
+        })
+
+        await prisma.notification.create({
+            data : {
+                userId: user.id,
+                title: 'AI Suggestion Generated',
+                message: `25 credits have been deducted for generating an AI suggestion on your timeline.`,
             }
         })
 
