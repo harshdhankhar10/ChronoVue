@@ -1,5 +1,6 @@
 import { Heart } from 'lucide-react'
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react'
 
 const Footer = () => {
@@ -24,24 +25,24 @@ const Footer = () => {
             <h4 className="font-bold text-lg mb-4">Product</h4>
             <ul className="space-y-3 text-gray-400 text-sm">
               <li>
-                <a href="#features" className="hover:text-white transition-all duration-300 ease-in-out">
+                <Link href="/#features" className="hover:text-white transition-all duration-300 ease-in-out">
                   Features
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#pricing" className="hover:text-white transition-all duration-300 ease-in-out">
+                <Link href="/#pricing" className="hover:text-white transition-all duration-300 ease-in-out">
                   Pricing
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-all duration-300 ease-in-out">
+                <Link href="/" className="hover:text-white transition-all duration-300 ease-in-out">
                   Security
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-all duration-300 ease-in-out">
+                <Link href="/" className="hover:text-white transition-all duration-300 ease-in-out">
                   Roadmap
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -50,24 +51,24 @@ const Footer = () => {
             <h4 className="font-bold text-lg mb-4">Company</h4>
             <ul className="space-y-3 text-gray-400 text-sm">
               <li>
-                <a href="#" className="hover:text-white transition-all duration-300 ease-in-out">
+                <Link href="/about-us" className="hover:text-white transition-all duration-300 ease-in-out">
                   About
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-all duration-300 ease-in-out">
+                <Link href="/blog" className="hover:text-white transition-all duration-300 ease-in-out">
                   Blog
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-all duration-300 ease-in-out">
+                <Link href="/careers" className="hover:text-white transition-all duration-300 ease-in-out">
                   Careers
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-all duration-300 ease-in-out">
+                <Link href="/contact" className="hover:text-white transition-all duration-300 ease-in-out">
                   Contact
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -76,24 +77,24 @@ const Footer = () => {
             <h4 className="font-bold text-lg mb-4">Resources</h4>
             <ul className="space-y-3 text-gray-400 text-sm">
               <li>
-                <a href="#" className="hover:text-white transition-all duration-300 ease-in-out">
+                <Link href="/" className="hover:text-white transition-all duration-300 ease-in-out">
                   Documentation
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-all duration-300 ease-in-out">
+                <Link href="/contact" className="hover:text-white transition-all duration-300 ease-in-out">
                   Help Center
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-all duration-300 ease-in-out">
+                <Link href="/community" className="hover:text-white transition-all duration-300 ease-in-out">
                   Community
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-all duration-300 ease-in-out">
+                <Link href="/" className="hover:text-white transition-all duration-300 ease-in-out">
                   API
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -102,15 +103,15 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-gray-400 text-sm">© {currentYear} ChronoVue. All rights reserved.</p>
             <div className="flex gap-6 text-sm text-gray-400">
-              <a href="#" className="hover:text-white transition-all duration-300 ease-in-out">
+              <Link href="/legal/privacy" className="hover:text-white transition-all duration-300 ease-in-out">
                 Privacy
-              </a>
-              <a href="#" className="hover:text-white transition-all duration-300 ease-in-out">
-                Terms
-              </a>
-              <a href="#" className="hover:text-white transition-all duration-300 ease-in-out">
-                Cookies
-              </a>
+              </Link>
+              <Link href="/legal/terms-conditions" className="hover:text-white transition-all duration-300 ease-in-out">
+                Terms &amp; Conditions
+              </Link>
+              <Link href="/legal/cancellation-refunds" className="hover:text-white transition-all duration-300 ease-in-out">
+                Refunds &amp; Cancellations
+              </Link>
             </div>
             <div className="flex items-center gap-1 text-gray-400 text-sm">
               Made with

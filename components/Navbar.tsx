@@ -42,16 +42,16 @@ const Navbar = () => {
                     </div>
 
                     <div className="hidden md:flex items-center space-x-8">
-                        <Link href="#features" className="nav-link">
+                        <Link href="/#features" className="nav-link">
                             Features
                         </Link>
-                        <Link href="#how-it-works" className="nav-link">
+                        <Link href="/about-us" className="nav-link">
+                            About Us
+                        </Link>
+                        <Link href="/#how-it-works" className="nav-link">
                             How It Works
                         </Link>
-                        <Link href="#pricing" className="nav-link">
-                            Pricing
-                        </Link>
-                        <Link href="#about" className="nav-link">
+                        <Link href="/solutions" className="nav-link">
                             Solutions
                         </Link>
                         <Link href="/community" className="nav-link text-primary font-semibold">
