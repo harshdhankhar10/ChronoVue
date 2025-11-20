@@ -87,16 +87,16 @@ const Navbar = () => {
                 {isMenuOpen && (
                     <div className="md:hidden  py-4 border-t border-border">
                         <div className="flex flex-col justify-center items-center space-y-4 px-8">
-                            <Link href="#features" className="text-muted-foreground hover:text-foreground transition-smooth">
+                            <Link href="/#features" className="text-muted-foreground hover:text-foreground transition-smooth">
                                 Features
                             </Link>
-                            <Link href="#how-it-works" className="text-muted-foreground hover:text-foreground transition-smooth">
+                            <Link href="/#how-it-works" className="text-muted-foreground hover:text-foreground transition-smooth">
                                 How It Works
                             </Link>
-                            <Link href="#pricing" className="text-muted-foreground hover:text-foreground transition-smooth">
+                            <Link href="/#pricing" className="text-muted-foreground hover:text-foreground transition-smooth">
                                 Pricing
                             </Link>
-                            <Link href="#about" className="text-muted-foreground hover:text-foreground transition-smooth">
+                            <Link href="/about-us" className="text-muted-foreground hover:text-foreground transition-smooth">
                                 About
                             </Link>
                             <div className="flex flex-col space-y-2 pt-4">
@@ -105,7 +105,7 @@ const Navbar = () => {
                                         Sign In
                                     </Button>
                                 )}
-                                <Button onClick={session ? (() => router.push('/dashboard')) : (() => router.push('/signup'))} >
+                                <Button onClick={session ? (() => router.push('/dashboard/user')) : (() => router.push('/signup'))} >
                                     {session ? <span>My Dashboard</span> : <span>Start Free Trial</span>}
                                 </Button>
                                 {session && (
