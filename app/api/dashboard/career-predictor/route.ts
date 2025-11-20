@@ -85,9 +85,11 @@ export async function POST(req: NextRequest) {
     });
 
     if (lastPrediction) {
-        const thirtyDaysInMs = 30 * 24 * 60 * 60 * 1000;
-        if (Date.now() - new Date(lastPrediction.createdAt).getTime() < thirtyDaysInMs) {
-            return NextResponse.json({ error: "You can only generate a new prediction every 30 days." }, { status: 429 });
+        const fifteenDaysInMs = 15 * 24 * 60 * 60 * 1000;
+        if (Date.now() - new Date(lastPrediction.createdAt).getTime() < fifteenDaysInMs) {
+            return NextResponse.json({ error:  `You can only generate a new prediction every 15 days.
+                ${Math.ceil((fifteenDaysInMs - (Date.now() - new Date(lastPrediction.createdAt).getTime())) / (1000 * 60 * 60 * 24))} days remaining for next prediction.
+              ` }, { status: 429 });
         }
     }
 
@@ -105,7 +107,7 @@ export async function POST(req: NextRequest) {
 
 
     try {
-        const {
+        let {
             careerGoal,
             programmingLevel,
             frontendLevel,
@@ -118,6 +120,20 @@ export async function POST(req: NextRequest) {
             salaryExpectation,
             additionalInfo
         } = await req.json();
+
+        if(!careerGoal || !programmingLevel || !frontendLevel || !backendLevel || !weeklyHours || !learningStyle || !timeline || !targetRoles || !companyPreference || !salaryExpectation){
+            careerGoal =  'Not Specified, Analyze based on user profile and onboarding data';
+            programmingLevel = 'Not Specified, Analyze based on user profile and onboarding data';
+            frontendLevel = 'Not Specified, Analyze based on user profile and onboarding data';
+            backendLevel = 'Not Specified, Analyze based on user profile and onboarding data';
+            weeklyHours = 'Not Specified, Analyze based on user profile and onboarding data';
+            learningStyle = 'Not Specified, Analyze based on user profile and onboarding data';
+            timeline = 'Not Specified, Analyze based on user profile and onboarding data';
+            targetRoles = ['Not Specified'];
+            companyPreference = 'Not Specified, Analyze based on user profile and onboarding data';
+            salaryExpectation = 'Not Specified, Analyze based on user profile and onboarding data';
+            additionalInfo = 'Not Specified, Analyze based on user profile and onboarding data';
+        }
 
         const onboardingData = `
 Career Goal: ${careerGoal}

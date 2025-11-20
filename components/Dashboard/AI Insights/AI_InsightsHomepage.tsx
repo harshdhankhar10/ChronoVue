@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { Loader } from 'lucide-react';
+import { formatDate } from '@/utils/formatDate';
 
 interface UserInfo {
   id: string;
@@ -30,7 +31,7 @@ interface AIInsight {
   title: string;
   type: string;
   period: string;
-  createdAt: string;
+  createdAt: Date;
   summary: string;
   confidence: number;
   keyFindings?: Array<{
@@ -64,7 +65,7 @@ interface CommunitySpace {
   id: string;
   name: string;
   description: string;
-  createdAt: string;
+  createdAt: Date;
 }
 
 interface AI_InsightsHomepageProps {
@@ -92,10 +93,6 @@ const AI_InsightsHomepage = ({ userInfo, aiInsights, communitySpaces, lastInsigh
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
-  const formatDate = (date: string) => {
-    return new Date(date).toLocaleDateString();
-  }
-
   const handleGenerateInsights = async () => {
     setLoading(true);
     try {
@@ -122,44 +119,44 @@ const AI_InsightsHomepage = ({ userInfo, aiInsights, communitySpaces, lastInsigh
     }
   };
 
-  const handleAddToTimeline = async(recommendation: Recommendation)=>{
+  const handleAddToTimeline = async (recommendation: Recommendation) => {
     setLoading(true);
     try {
-        const timeline = {
-            name : recommendation.title,
-            category : recommendation.category,
-            resources : recommendation.resources,
-            risks : recommendation.riskAnalysis ? recommendation.riskAnalysis : [],
-            priority : recommendation.priority.toUpperCase(),
-            status : 'NOT_STARTED',
-            endDate : new Date(new Date().getTime() + 365 * 24 * 60 * 60 * 1000),
-            duration : 'ONE_YEAR',
-            startDate : new Date(),
+      const timeline = {
+        name: recommendation.title,
+        category: recommendation.category,
+        resources: recommendation.resources,
+        risks: recommendation.riskAnalysis ? recommendation.riskAnalysis : [],
+        priority: recommendation.priority.toUpperCase(),
+        status: 'NOT_STARTED',
+        endDate: new Date(new Date().getTime() + 365 * 24 * 60 * 60 * 1000),
+        duration: 'ONE_YEAR',
+        startDate: new Date(),
 
-        }
-        const response = await axios.post('/api/dashboard/timelines/create', {
-            timeline,
-            milestones : [],
-            action : "FROM_GLOBAL_AI_INSIGHTS"
-            
-        })
-        if (response.status === 201){
-            Swal.fire({
-                icon: 'success',
-                title: 'Success',
-                text: response.data.message,
-            });
-            router.push('/dashboard/user/timelines');
-        }
-    } catch (error:any) {
-        console.log(error)
+      }
+      const response = await axios.post('/api/dashboard/timelines/create', {
+        timeline,
+        milestones: [],
+        action: "FROM_GLOBAL_AI_INSIGHTS"
+
+      })
+      if (response.status === 201) {
         Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: error.response?.data?.error || 'Something went wrong!',
+          icon: 'success',
+          title: 'Success',
+          text: response.data.message,
         });
-    }finally{
-        setLoading(false);
+        router.push('/dashboard/user/timelines');
+      }
+    } catch (error: any) {
+      console.log(error)
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: error.response?.data?.error || 'Something went wrong!',
+      });
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -253,15 +250,21 @@ const AI_InsightsHomepage = ({ userInfo, aiInsights, communitySpaces, lastInsigh
           </div>
           <div className="flex items-center gap-4">
             <div className="text-right">
-              <div className="text-sm text-gray-500">Next Generation</div>
               <div className="flex items-center gap-2">
-                <div className="w-3 h-3 bg-orange-500 rounded-full animate-pulse"></div>
-                <span className="font-semibold text-gray-900">{daysUntilNext} days</span>
+                <span className="font-semibold text-gray-900">
+                  {daysUntilNext < 0 ? (
+                    <Button onClick={handleGenerateInsights} disabled={loading}>
+                      {loading ? <Loader className="w-4 h-4 animate-spin" /> : 'Generate New Insights'}
+                    </Button>
+                  ) : (
+                    <Button disabled>
+                      Generate New in {daysUntilNext} days
+                    </Button>
+                  )}
+                </span>
               </div>
             </div>
-            <Button onClick={handleGenerateInsights} disabled={loading}>
-              {loading ? <Loader className="w-4 h-4 animate-spin" /> : 'Generate New'}
-            </Button>
+
           </div>
         </div>
       </div>
@@ -272,13 +275,12 @@ const AI_InsightsHomepage = ({ userInfo, aiInsights, communitySpaces, lastInsigh
             <button
               key={insight.id}
               onClick={() => setCurrentInsightIndex(index)}
-              className={`px-4 py-2 rounded-lg font-medium ${
-                currentInsightIndex === index
+              className={`px-4 py-2 rounded-lg font-medium ${currentInsightIndex === index
                   ? 'bg-orange-600 text-white'
                   : 'bg-white text-gray-700 border border-gray-300'
-              }`}
+                }`}
             >
-              {new Date(insight.createdAt).toLocaleDateString()}
+              {formatDate(insight.createdAt)}
             </button>
           ))}
         </div>
@@ -296,11 +298,11 @@ const AI_InsightsHomepage = ({ userInfo, aiInsights, communitySpaces, lastInsigh
               )}
             </div>
             <p className="text-gray-600 mb-4 leading-relaxed text-lg">{currentInsight.summary}</p>
-            
+
             <div className="flex items-center gap-6 text-sm flex-wrap">
               <div className="flex items-center gap-2">
                 <span className="text-gray-500">Generated:</span>
-                <span className="font-medium">{new Date(currentInsight.createdAt).toLocaleDateString()}</span>
+                <span className="font-medium">{formatDate(currentInsight.createdAt)}</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-gray-500">Confidence:</span>
@@ -325,11 +327,10 @@ const AI_InsightsHomepage = ({ userInfo, aiInsights, communitySpaces, lastInsigh
                   <div key={index} className="border border-gray-200 rounded-lg p-4">
                     <div className="flex items-start justify-between mb-2">
                       <h4 className="font-semibold text-gray-900">{finding.title}</h4>
-                      <span className={`text-sm font-bold px-2 py-1 rounded ${
-                        finding.trend === 'positive' ? 'bg-green-100 text-green-800' : 
-                        finding.trend === 'negative' ? 'bg-red-100 text-red-800' : 
-                        'bg-blue-100 text-blue-800'
-                      }`}>
+                      <span className={`text-sm font-bold px-2 py-1 rounded ${finding.trend === 'positive' ? 'bg-green-100 text-green-800' :
+                          finding.trend === 'negative' ? 'bg-red-100 text-red-800' :
+                            'bg-blue-100 text-blue-800'
+                        }`}>
                         {finding.metric}
                       </span>
                     </div>
@@ -339,7 +340,7 @@ const AI_InsightsHomepage = ({ userInfo, aiInsights, communitySpaces, lastInsigh
               </div>
             </div>
           )}
-            {currentInsight.riskAnalysis && currentInsight.riskAnalysis.length > 0 && (
+          {currentInsight.riskAnalysis && currentInsight.riskAnalysis.length > 0 && (
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Risk Analysis</h3>
               <div className="space-y-3">
@@ -347,9 +348,8 @@ const AI_InsightsHomepage = ({ userInfo, aiInsights, communitySpaces, lastInsigh
                   <div key={index} className="p-3 bg-red-50 border border-red-200 rounded-lg">
                     <div className="flex items-center justify-between mb-1">
                       <span className="font-medium text-red-900">{risk.risk}</span>
-                      <span className={`text-xs font-medium px-2 py-1 rounded-full ${
-                        risk.severity === 'HIGH' ? 'bg-red-100 text-red-800' : 'bg-orange-100 text-orange-800'
-                      }`}>
+                      <span className={`text-xs font-medium px-2 py-1 rounded-full ${risk.severity === 'HIGH' ? 'bg-red-100 text-red-800' : 'bg-orange-100 text-orange-800'
+                        }`}>
                         {risk.severity} risk
                       </span>
                     </div>
@@ -371,9 +371,8 @@ const AI_InsightsHomepage = ({ userInfo, aiInsights, communitySpaces, lastInsigh
                       <div className="font-medium text-red-900">{skill.skill}</div>
                       <div className="text-sm text-red-700">{skill.estimatedLearningTime}</div>
                     </div>
-                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                      skill.importance === 'critical' ? 'bg-red-100 text-red-800' : 'bg-orange-100 text-orange-800'
-                    }`}>
+                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${skill.importance === 'critical' ? 'bg-red-100 text-red-800' : 'bg-orange-100 text-orange-800'
+                      }`}>
                       {skill.importance}
                     </span>
                   </div>
@@ -381,21 +380,25 @@ const AI_InsightsHomepage = ({ userInfo, aiInsights, communitySpaces, lastInsigh
               </div>
             </div>
           )}
-            <div className="bg-gradient-to-r from-orange-500 to-orange-600 rounded-xl shadow-sm p-6 text-white">
+          <div className="bg-gradient-to-r from-orange-500 to-orange-600 rounded-xl shadow-sm p-6 text-white">
             <h3 className="text-lg font-semibold mb-2">Next Insight Generation</h3>
             <p className="text-sm text-orange-100 mb-4">
               Every Monday at 12:00 AM UTC
             </p>
             <div className="w-full bg-orange-400 rounded-full h-2">
-              <div 
+              <div
                 className="bg-white h-2 rounded-full transition-all duration-500"
-                style={{ width: `${((7 - daysUntilNext) / 7) * 100}%` }}
+                style={{
+                  width: `${Math.min(100, ((7 - daysUntilNext) / 7) * 100)}%`
+                }}
               ></div>
             </div>
-            <p className="text-xs text-orange-200 mt-2">{daysUntilNext} days until next generation</p>
+            <p className="text-xs text-orange-200 mt-2">
+              {daysUntilNext > 0 ? `Next insights will be generated in ${daysUntilNext} day${daysUntilNext !== 1 ? 's' : ''}.` : 'New insights can be generated now!'}
+              </p>
           </div>
         </div>
-        
+
 
         <div className="space-y-6">
           {currentInsight.recommendations && currentInsight.recommendations.length > 0 && (
@@ -408,33 +411,31 @@ const AI_InsightsHomepage = ({ userInfo, aiInsights, communitySpaces, lastInsigh
               </div>
               <div className="space-y-4">
                 {currentInsight.recommendations.map((rec: any, index: number) => (
-                  <div key={index} className={`border-l-4 ${
-                    rec.priority === 'HIGH' ? 'border-red-500' :
-                    rec.priority === 'MEDIUM' ? 'border-orange-500' : 'border-blue-500'
-                  } pl-4 py-3 bg-gray-50 rounded-r-lg`}>
+                  <div key={index} className={`border-l-4 ${rec.priority === 'HIGH' ? 'border-red-500' :
+                      rec.priority === 'MEDIUM' ? 'border-orange-500' : 'border-blue-500'
+                    } pl-4 py-3 bg-gray-50 rounded-r-lg`}>
                     <div className="flex items-start justify-between mb-2">
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-1">
                           <h4 className="font-semibold text-gray-900">{rec.title}
-                          <Button variant={'link'} onClick={()=>handleAddToTimeline(rec)} disabled={loading}>
-                        {loading ? <span className='flex items-center gap-2'>
-                            Adding
-                            <Loader className="w-4 h-4 animate-spin" />
-                        </span> : 'Add to Timeline'}
-                      </Button>
+                            <Button variant={'link'} onClick={() => handleAddToTimeline(rec)} disabled={loading}>
+                              {loading ? <span className='flex items-center gap-2'>
+                                Adding
+                                <Loader className="w-4 h-4 animate-spin" />
+                              </span> : 'Add to Timeline'}
+                            </Button>
                           </h4>
-                          <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${
-                            rec.priority === 'HIGH' ? 'bg-red-100 text-red-800' :
-                            rec.priority === 'MEDIUM' ? 'bg-orange-100 text-orange-800' :
-                            'bg-blue-100 text-blue-800'
-                          }`}>
+                          <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${rec.priority === 'HIGH' ? 'bg-red-100 text-red-800' :
+                              rec.priority === 'MEDIUM' ? 'bg-orange-100 text-orange-800' :
+                                'bg-blue-100 text-blue-800'
+                            }`}>
                             {rec.priority}
                           </span>
                         </div>
                         <p className="text-sm text-gray-600 mb-2">{rec.description}</p>
                       </div>
                     </div>
-                    
+
                     <div className="flex flex-wrap gap-2 text-xs">
                       <span className="bg-purple-100 text-purple-800 px-2 py-1 rounded-full">
                         Impact: {rec.impact}
@@ -446,17 +447,17 @@ const AI_InsightsHomepage = ({ userInfo, aiInsights, communitySpaces, lastInsigh
                         {rec.timeline}
                       </span>
                     </div>
-                    
-                   
+
+
                   </div>
                 ))}
               </div>
             </div>
           )}
 
-        
 
-        
+
+
         </div>
       </div>
     </div>

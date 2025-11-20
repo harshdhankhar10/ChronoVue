@@ -201,6 +201,7 @@ const AIChatbotModal = ({ isOpen = false, onClose }: AIChatbotModalProps) => {
           suggestedActions: response.data.data.suggestedActions,
           timestamp: Date.now()
         };
+        setError('');
         saveChatMessage(aiMessage);
       }
     } catch (error: any) {
@@ -330,14 +331,27 @@ const AIChatbotModal = ({ isOpen = false, onClose }: AIChatbotModalProps) => {
                       ? 'bg-primary text-white rounded-tr-none'
                       : 'bg-white border-gray-100 rounded-tl-none'
                     }`}>
-                    <p className="text-sm leading-relaxed">{chat.message}</p>
+                    <p className="text-sm leading-relaxed">
+                      {chat.message.split('**').map((part, index) =>
+                        index % 2 === 1 ? (
+                          <strong key={index} className="font-bold">{part}</strong>
+                        ) : (
+                          part.split('\n').map((line, lineIndex) => (
+                            <span key={lineIndex}>
+                              {line}
+                              {lineIndex < part.split('\n').length - 1 && <br />}
+                            </span>
+                          ))
+                        )
+                      )}
+                      </p>
                     {chat.suggestedActions && chat.suggestedActions.length > 0 && (
-                      <div className="flex flex-wrap gap-1 mt-2">
+                      <div className="flex flex-wrap gap-3 mt-4 justify-center text-primary">
                         {chat.suggestedActions.map((action, index) => (
-                          <button
+                          <button 
                             key={index}
                             onClick={() => handleSuggestionClick(action)}
-                            className="text-xs bg-white/20 hover:bg-white/30 text-white px-2 py-1 rounded transition-colors"
+                            className="items-center"
                           >
                             {action}
 

@@ -42,7 +42,6 @@ const page = async ({searchParams}:any) => {
         id: id,
       }
     })
-    console.log("prediction", prediction)
     if(!prediction){
       return redirect('/dashboard/user/career-predictor')
     } 
@@ -53,9 +52,11 @@ const page = async ({searchParams}:any) => {
   return (
     <>
 <div>
-  <h1 className="text-2xl font-bold mb-4">
+  <div>
+    <h1 className="text-2xl font-bold mb-4">
     View your AI Career Predictions
   </h1>
+  </div>
   {allPredictions.map((prediction) => {
     return (
       <div key={prediction.id} className="border-4 border-primary p-4 rounded mb-4">

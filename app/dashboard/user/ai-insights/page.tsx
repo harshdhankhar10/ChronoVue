@@ -42,10 +42,12 @@ const page = async () => {
   })
 
   const lastInsight = aiInsights[0]
+  const lastGenerationDate = lastInsight ? lastInsight.createdAt : null
   const nextGenerationDate = new Date()
-  nextGenerationDate.setDate(nextGenerationDate.getDate() + 7)
+  if (lastGenerationDate) {
+    nextGenerationDate.setDate(lastGenerationDate.getDate() + 7)
+  }
   const daysUntilNext = Math.ceil((nextGenerationDate.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24))
- 
   return (
     <AI_InsightsHomepage 
       userInfo={userInfo}

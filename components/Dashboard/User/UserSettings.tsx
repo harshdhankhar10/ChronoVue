@@ -14,7 +14,16 @@ interface User {
   username: string
   profilePicture: string
   phoneNumber: string | null
-  credits: number
+  credits: number,
+  profile: Profile
+}
+
+interface Profile {
+  bio: string
+  location: string
+  carrerStage: string
+  headline: string
+  timezone: string
 }
 
 interface UserSettingsProps {
@@ -28,7 +37,14 @@ const UserSettings = ({ user }: UserSettingsProps) => {
     fullName: user.fullName,
     email: user.email,
     phoneNumber: user.phoneNumber || '',
-    username: user.username
+    username: user.username,
+    profile: {
+      bio: user.profile.bio,
+      location: user.profile.location,
+      carrerStage: user.profile.carrerStage,
+      headline: user.profile.headline,
+      timezone: user.profile.timezone,
+    }
   })
 
   const router = useRouter()
@@ -59,7 +75,7 @@ const UserSettings = ({ user }: UserSettingsProps) => {
     Swal.fire({
       icon: 'error',
       title: 'File too large',
-      text: `Please select an image smaller than ${maxSizeMB}MB.`
+      text: `Your file is of ${fileSizeInMB.toFixed(2)} MB. Please select an image smaller than ${maxSizeMB} MB.`
     })
     return
   }
@@ -173,6 +189,41 @@ const UserSettings = ({ user }: UserSettingsProps) => {
     }
   }
 
+  const handleUpdateUserInfo = async () => {
+    setLoading(true)
+    try {
+      const response = await axios.patch('/api/dashboard/settings/update-userInfo', {
+        fullName: formData.fullName,
+        username: formData.username,
+        phoneNumber: formData.phoneNumber,
+        profile: {
+          bio: formData.profile.bio,
+          location: formData.profile.location,
+          carrerStage: formData.profile.carrerStage,
+          headline: formData.profile.headline,
+          timezone: formData.profile.timezone,
+        }
+      })
+      if(response.status === 200){
+        Swal.fire({
+          icon: 'success',
+          title: 'Success',
+          text: 'User information updated successfully'
+        })
+        router.refresh()
+      }
+    } catch (error:any) {
+      console.error('Error updating user information:', error)
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: error.response?.data?.error || 'An error occurred while updating user information'
+      })
+    } finally {
+      setLoading(false) 
+    }
+  }
+
   return (
     <>
     <div className="min-h-screen bg-gray-50 px-2">
@@ -222,8 +273,8 @@ const UserSettings = ({ user }: UserSettingsProps) => {
                 <div>
                  <div className="flex items-center justify-between mb-6">
                      <h2 className="text-xl font-bold text-gray-900">Profile Settings</h2>
-                     <Button>
-                        Save Changes
+                     <Button onClick={handleUpdateUserInfo} disabled={loading}>
+                      {loading ? <Loader className="animate-spin mr-2 h-4 w-4" /> : 'Save Changes'}
                      </Button>
                  </div>
                   <div className="space-y-6">
@@ -269,7 +320,9 @@ const UserSettings = ({ user }: UserSettingsProps) => {
 
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Email Address
+                        Email Address <span className="text-gray-500 font-normal pl-1">
+                          (Cannot be changed)
+                        </span>
                       </label>
                       <Input
                         type="email"
@@ -291,11 +344,59 @@ const UserSettings = ({ user }: UserSettingsProps) => {
                         onChange={(e) => setFormData({...formData, phoneNumber: e.target.value})}
                       />
                     </div>
-                  </div>
-                  
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Bio
+                      </label>
+                      <Input
+                        type="text"
+                        value={formData.profile.bio}
+                        onChange={(e) => setFormData({...formData, profile: {...formData.profile, bio: e.target.value}})}
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Location
+                      </label>
+                      <Input
+                        type="text"
+                        value={formData.profile.location}
+                        onChange={(e) => setFormData({...formData, profile: {...formData.profile, location: e.target.value}})}
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Career Stage
+                      </label>
+                      <Input
+                        type="text"
+                        value={formData.profile.carrerStage}
+                        onChange={(e) => setFormData({...formData, profile: {...formData.profile, carrerStage: e.target.value}})}
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Headline
+                      </label>
+                      <Input
+                        type="text"
+                        value={formData.profile.headline}
+                        onChange={(e) => setFormData({...formData, profile: {...formData.profile, headline: e.target.value}})}
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Timezone
+                      </label>
+                      <Input
+                        type="text"
+                        value={formData.profile.timezone}
+                        onChange={(e) => setFormData({...formData, profile: {...formData.profile, timezone: e.target.value}})}
+                      />
+                    </div>
+                    </div>
                 </div>
               )}
-
               {activeTab === 'account' && (
                 <div>
                   <h2 className="text-xl font-bold text-gray-900 mb-6">Account Settings</h2>
@@ -308,9 +409,9 @@ const UserSettings = ({ user }: UserSettingsProps) => {
                             <div className="font-medium text-gray-900">Available Credits</div>
                             <div className="text-2xl font-bold text-orange-600">{user.credits}</div>
                           </div>
-                          <button className="bg-orange-600 text-white px-4 py-2 rounded-lg hover:bg-orange-700 transition-colors">
+                          <Button onClick={() => router.push('/dashboard/user/settings/credits')}>
                             Buy Credits
-                          </button>
+                          </Button>
                         </div>
                       </div>
                     </div>
@@ -383,7 +484,7 @@ const UserSettings = ({ user }: UserSettingsProps) => {
                   <div className="space-y-6">
                     <div>
                       <h3 className="text-lg font-medium text-gray-900 mb-4">Profile Visibility</h3>
-                      <select className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent">
+                      <select disabled className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent">
                         <option>Public</option>
                         <option>Community Only</option>
                         <option>Private</option>
